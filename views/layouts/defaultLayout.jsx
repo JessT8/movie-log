@@ -13,7 +13,7 @@ class DefaultLayout extends React.Component {
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
       </head>
-        <body style={{backgroundColor:"#191919"}}>
+        <body style={{backgroundColor:"#191919", color:"#FFFFFF"}}>
           {this.props.children}
         </body>
       </html>
