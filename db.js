@@ -35,7 +35,7 @@ if( process.env.DATABASE_URL ){
   configs = {
     user: 'jessica',
     host: '127.0.0.1',
-    database: 'tweedr_db',
+    database: 'movie_db',
     port: 5432
   };
 }
@@ -64,6 +64,8 @@ pool.on('error', function (err) {
 
 const allUserModelsFunction = require('./models/user');
 const userModelsObject = allUserModelsFunction( pool );
+const allMovieModelsFunction = require('./models/movie');
+const movieModelsObject = allMovieModelsFunction( pool );
 
 
 
@@ -92,5 +94,6 @@ module.exports = {
   /*
    * ADD APP MODELS HERE
    */
-  users: userModelsObject,
+  movie: movieModelsObject,
+  users: userModelsObject
 };
