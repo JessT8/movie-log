@@ -5,7 +5,7 @@ class NavLayout extends React.Component {
     if(this.props.loggedIn === "true"){
         displayLogout =  (<div className="d-flex flex-row-reverse align-items-end"><a className="nav-link mt-4" href="/signout">Sign out</a>              </div>);
     }else{
-          displayLogout =  (<div className="d-flex flex-row-reverse align-items-end"><a className="nav-link mt-4" href="/login">Sign In</a><a className="nav-link mt-4" href="/register">Movies</a><a className="nav-link mt-4" href="/register">About</a></div>);
+          displayLogout =  (<div className="d-flex flex-row-reverse align-items-end"><a className="nav-link mt-4" href="/signin">Sign In</a><a className="nav-link mt-4" href="/register">Movies</a><a className="nav-link mt-4" href="/register">About</a></div>);
     }
 
     return (

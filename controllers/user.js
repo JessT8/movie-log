@@ -18,10 +18,34 @@ module.exports = (db) => {
         (err)?response.send(err):response.send("registered");
     });
    }
+let signin = (request, response) => {
+     const data = {errmsg: ""};
+    // (isLoggedIn(request))
+    // ? response.redirect("/") :
+    response.render("user/signin", data);
+  }
    //sign user in
-   let signin = (request, response)=>{
-    response.send("Working");
+   let signingIn = (request, response)=>{
+  let username = request.body.username;
+    let password = sha256(request.body.password+SALT);
+  db.users.validateUser(username,password,(error, user)=>{
+    if(error){
+      response.send(error);
+        }else{
+            if(user.length < 1){
+                const data = { errmsg : "Your user name or password is invalid."};
+                response.send( "Work");
+            }else{
+                 let hashedCookie = sha256(SALT+user[0].Userid);
+                response.cookie('user_id', user[0].Userid);
+                response.cookie('username', user[0].username);
+                response.cookie('loggedIn', hashedCookie);
+                response.send('work');
+            }
+        }
+    });
       }
+
   /**
    * ===========================================
    * Export controller functions as a module
@@ -30,7 +54,8 @@ module.exports = (db) => {
   return {
     registerPage,
     register,
-    signin
+    signin,
+    signingIn
   };
 
 }
