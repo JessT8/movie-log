@@ -18,10 +18,12 @@ module.exports = (app, allModels) => {
 
   //MOVIES
  // app.get('/about', movieControllerCallbacks.about)
- // app.get('/movies',movieControllerCallbacks.movielist);
+  app.get('/movies',movieControllerCallbacks.movielist);
+   app.get('/about',movieControllerCallbacks.about);
   //USERS
-   app.get('/register', userControllerCallbacks.registerPage);
-   app.post('/register', userControllerCallbacks.register);
+  app.get('/register', userControllerCallbacks.registerPage);
+  app.post('/register', userControllerCallbacks.register);
   app.get('/signin', userControllerCallbacks.signin);
   app.post('/signin', userControllerCallbacks.signingIn);
+    app.get('/signout', userControllerCallbacks.signout);
 };
