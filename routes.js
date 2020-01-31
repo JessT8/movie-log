@@ -15,11 +15,9 @@ module.exports = (app, allModels) => {
   // require the controller
   const movieControllerCallbacks = require('./controllers/movie')(allModels);
   const userControllerCallbacks = require('./controllers/user')(allModels);
-
-  //MOVIES
- // app.get('/about', movieControllerCallbacks.about)
-  app.get('/movies',movieControllerCallbacks.movielist);
-   app.get('/about',movieControllerCallbacks.about);
+  app.get('/movies/:id/', movieControllerCallbacks.getMovie);
+  app.get('/',movieControllerCallbacks.movielist);
+  app.get('/about',movieControllerCallbacks.about);
   //USERS
   app.get('/register', userControllerCallbacks.registerPage);
   app.post('/register', userControllerCallbacks.register);
