@@ -6,7 +6,7 @@ var MovieLayout = require('../layouts/movieLayout');
 class Movie extends React.Component {
   render() {
     return (
-        <DefaultLayout title="Movie">
+        <DefaultLayout title={this.props.title}>
         <NavLayout loggedIn={this.props.loggedIn}></NavLayout>
 
 <div className="row m-0">
@@ -17,7 +17,7 @@ src="https://www.youtube.com/embed/tgbNymZ7vqY" allowFullScreen="true">
 <p>Genre</p>
 </div>
 <div className="col">
-<h2><a href="#"><span class="glyphicon glyphicon-bookmark"></span></a> {this.props.title}
+<h2><a href="#" id="bookmark"><span class="glyphicon glyphicon-bookmark"></span></a> {this.props.title}
         </h2>
 <p>The rise of the Guadalajara Cartel as an American DEA agent learns the danger of targeting narcos in Mexico.</p><p>The rise of the Guadalajara Cartel as an American DEA agent learns the danger of targeting narcos in Mexico.
 Stars: Diego Luna, Scoot McNairy, Teresa Ruiz, Michael Peña</p>

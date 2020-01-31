@@ -11,6 +11,19 @@
 	height:400px;
 	width:290px;
 }
+#bookmark{
+	color:white;
+}
+#bookmark:hover{
+	color:#FFFF0A;
+}
+.poster2{
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:cover;
+	height:400px;
+	width:290px;
+}
 
 .poster:hover {
 	  transition: transform .5s ease;
