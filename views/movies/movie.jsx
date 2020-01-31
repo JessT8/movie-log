@@ -12,7 +12,7 @@ class Movie extends React.Component {
 <div className="row m-0">
 <div className="col pt-5">
 <iframe className="pt-2" width="854" height="480"
-src="https://www.youtube.com/embed/tgbNymZ7vqY" allowfullscreen="true">
+src="https://www.youtube.com/embed/tgbNymZ7vqY" allowFullScreen="true">
 </iframe>
 <p>Genre</p>
 </div>

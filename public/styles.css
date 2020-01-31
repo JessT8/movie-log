@@ -17,10 +17,10 @@
   transform: scale(1.05);
   cursor:pointer;
 }
-a{
+.navLink{
 	color:white;
 }
-a:hover{
+.navLink:hover{
 	color:#FFFF0A;
 }
 /* Dropdown Button */

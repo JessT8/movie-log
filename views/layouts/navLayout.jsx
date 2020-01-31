@@ -3,16 +3,16 @@ class NavLayout extends React.Component {
   render() {
     let displayLogout = "false";
     if(this.props.loggedIn === "true"){
-        displayLogout =  (<div className="d-flex flex-row-reverse align-items-end"><a className="nav-link mt-4" href="/signout">Sign out</a>
- <div class="dropdown">
-  <button class="dropbtn">Me</button>
-  <div class="dropdown-content">
-    <a href="#">My watchlist</a>
-    <a href="#">Completed</a>
+        displayLogout =  (<div className="d-flex flex-row-reverse align-items-end"><a className="nav-link mt-4 navLink" href="/signout">Sign out</a>
+ <div className="dropdown">
+  <button className="dropbtn">Me</button>
+  <div className="dropdown-content">
+    <a className="navLink" href="#">My watchlist</a>
+    <a className="navLink" href="#">Completed</a>
   </div>
-</div><a className="nav-link mt-4" href="#">People</a><a className="nav-link mt-4" href="/">Movies</a><a className="nav-link mt-4" href="/about">About</a></div>);
+</div><a className="nav-link mt-4 navLink" href="#">People</a><a className="nav-link mt-4 navLink" href="/">Movies</a><a className="nav-link mt-4 navLink" href="/about">About</a></div>);
     }else{
-          displayLogout =  (<div className="d-flex flex-row-reverse align-items-end"><a className="nav-link mt-4" href="/signin">Sign In</a><a className="nav-link mt-4" href="/">Movies</a><a className="nav-link mt-4" href="/about">About</a></div>);
+          displayLogout =  (<div className="d-flex flex-row-reverse align-items-end"><a className="nav-link mt-4 navLink" href="/signin">Sign In</a><a className="nav-link mt-4 navLink" href="/">Movies</a><a className="nav-link mt-4 navLink" href="/about">About</a></div>);
     }
 
     return (
