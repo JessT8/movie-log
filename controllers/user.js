@@ -15,7 +15,7 @@ module.exports = (db) => {
     let password = request.body.password;
     let hashpassword = sha256(password+SALT);
     db.users.registerUser(username, hashpassword, (err,result)=>{
-        (err)?response.send(err):response.send("registered");
+        (err)?response.send(err):response.render("user/signin");
     });
    }
 let signin = (request, response) => {
@@ -34,17 +34,24 @@ let signin = (request, response) => {
         }else{
             if(user.length < 1){
                 const data = { errmsg : "Your user name or password is invalid."};
-                response.send( "Work");
+                response.send( data.errmsg);
             }else{
-                 let hashedCookie = sha256(SALT+user[0].Userid);
-                response.cookie('user_id', user[0].Userid);
+                console.log(user);
+                 let hashedCookie = sha256(SALT+user[0].userid);
+                response.cookie('user_id', user[0].userid);
                 response.cookie('username', user[0].username);
                 response.cookie('loggedIn', hashedCookie);
-                response.send('work');
+                response.redirect('/movies');
             }
         }
     });
       }
+      let signout = (request,response)=>{
+    response.clearCookie('user_id');
+    response.clearCookie('username');
+    response.clearCookie('loggedIn');
+    response.redirect("/movies");
+}
 
   /**
    * ===========================================
@@ -55,7 +62,8 @@ let signin = (request, response) => {
     registerPage,
     register,
     signin,
-    signingIn
+    signingIn,
+    signout
   };
 
 }
