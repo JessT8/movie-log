@@ -32,7 +32,7 @@ module.exports = (db) => {
         {poster_path: '/v6xrz4fr92KY1oNC3HsEvrsvR1n.jpg'},
         {poster_path: '/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg'},
         {poster_path: '/pKKvCaL1TPTVtbI6EeliyND3api.jpg'},
-           {poster_path: '/pKKvCaL1TPTVtbI6EeliyND3api.jpg'}
+        {poster_path: '/pKKvCaL1TPTVtbI6EeliyND3api.jpg'}
         ],
         loggedIn
      }
