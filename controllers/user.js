@@ -41,7 +41,7 @@ let signin = (request, response) => {
                 response.cookie('user_id', user[0].userid);
                 response.cookie('username', user[0].username);
                 response.cookie('loggedIn', hashedCookie);
-                response.redirect('/movies');
+                response.redirect('/');
             }
         }
     });
@@ -50,7 +50,7 @@ let signin = (request, response) => {
     response.clearCookie('user_id');
     response.clearCookie('username');
     response.clearCookie('loggedIn');
-    response.redirect("/movies");
+    response.redirect("/");
 }
 
   /**
