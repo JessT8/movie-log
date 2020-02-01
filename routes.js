@@ -21,6 +21,7 @@ module.exports = (app, allModels) => {
   app.get('/',movieControllerCallbacks.movielist);
   app.get('/about',movieControllerCallbacks.about);
   app.post('/watchlist/:id/favorite', movieControllerCallbacks.updateFavorite);
+  app.post('/watchlist/:id/complete', movieControllerCallbacks.updateComplete);
   //USERS
   app.get('/register', userControllerCallbacks.registerPage);
   app.post('/register', userControllerCallbacks.register);
