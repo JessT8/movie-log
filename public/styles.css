@@ -25,6 +25,15 @@ width:"290px";
   transform: scale(1.05);
   cursor:pointer;
 }
+.clickedTick{
+	color:green;
+	cursor: default;
+}
+.clickedHeart{
+	font-size: 40px;
+	color:red;
+	cursor: default;
+}
 .tick:hover{
 	color:green;
 }
