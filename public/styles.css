@@ -15,6 +15,9 @@
 	font-size: 40px;
 	color:white;
 	cursor:pointer;
+	background-color: transparent;
+	border:0px;
+	padding:0px;
 }
 .watchlist{
 height:"500px";
@@ -28,11 +31,17 @@ width:"290px";
 .clickedTick{
 	color:green;
 	cursor: default;
+		background-color: transparent;
+			border:0px;
+			  pointer-events:none;
 }
 .clickedHeart{
 	font-size: 40px;
 	color:red;
 	cursor: default;
+	background-color: transparent;
+		border:0px;
+		  pointer-events:none;
 }
 .tick:hover{
 	color:green;
