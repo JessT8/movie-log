@@ -11,6 +11,29 @@
 	height:400px;
 	width:290px;
 }
+.icon{
+	font-size: 40px;
+	color:white;
+	cursor:pointer;
+}
+.watchlist{
+height:"500px";
+width:"290px";
+}
+.watchlist:hover {
+	transition: transform .5s ease;
+  transform: scale(1.05);
+  cursor:pointer;
+}
+.tick:hover{
+	color:green;
+}
+.heart:hover{
+	color:red;
+}
+.cross:hover{
+	color:red;
+}
 #bookmarked{
 		color:#FFFF0A;
 	  background-color: transparent;
@@ -24,7 +47,7 @@
 	color:#FFFF0A;
 	  cursor:pointer;
 }
-.poster2{
+.noanimationposter{
 	background-position:center;
 	background-repeat:no-repeat;
 	background-size:cover;
@@ -87,4 +110,8 @@
 
 .glyphicon {
     font-size: 20px;
+}
+.center{
+	margin: 0 auto;
+	 width: 85%;
 }
