@@ -11,6 +11,11 @@
 	height:400px;
 	width:290px;
 }
+#bookmarked{
+		color:#FFFF0A;
+	  background-color: transparent;
+		cursor:default;
+}
 #bookmark{
 	color:white;
 	background-color: transparent;
