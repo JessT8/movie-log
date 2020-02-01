@@ -58,9 +58,22 @@ module.exports = (dbPoolInstance) => {
         }
     })
   }
+  let watchlist = (userid, callback)=>{
+    let query = "SELECT DISTINCT movie.title, movie.movieid, movie.poster, movie.plot, watchlist.userid  FROM movie INNER JOIN watchlist ON(watchlist.movieid=movie.movieid) WHERE watchlist.userid=$1";
+    let values = [userid];
+    dbPoolInstance.query(query, values, (err,resultQuery)=>{
+        if(err){
+            callback(err,null);
+        }else{
+            (resultQuery.rows.length>0)?callback(null, resultQuery.rows):
+                callback(null,null);
+        }
+    });
+  }
   return {
     checkBookmark,
     addBookmark,
-    checkMovies
+    checkMovies,
+    watchlist
   };
 };
