@@ -71,8 +71,6 @@ module.exports = (db) => {
 });
       }
 
-
-
   let getWatchlist = (request, response)=>{
     let user_id = request.cookies.user_id;
     db.movie.watchlist(user_id, (err, watchlist)=>{
@@ -81,6 +79,17 @@ module.exports = (db) => {
         }else{
             const data = {movies:watchlist}
             response.render("watchlist/watchlist", data)
+        }
+    })
+  }
+  let updateFavorite = (request, response)=>{
+    let user_id= request.cookies.user_id;
+    let movie_id = request.params.id;
+    db.movie.addFavorites(user_id, movie_id, (err,watchlist)=>{
+        if(err){
+            response.send("updateFavorite"+err);
+        }else{
+            response.redirect("/watchlist");
         }
     })
   }
@@ -94,7 +103,8 @@ module.exports = (db) => {
     about,
     getMovie,
     bookmarkMovie,
-    getWatchlist
+    getWatchlist,
+    updateFavorite
   };
 
 }
