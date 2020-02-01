@@ -20,6 +20,7 @@ module.exports = (app, allModels) => {
   app.post('/movies/:id', movieControllerCallbacks.bookmarkMovie);
   app.get('/',movieControllerCallbacks.movielist);
   app.get('/about',movieControllerCallbacks.about);
+  app.post('/watchlist/:id/favorite', movieControllerCallbacks.updateFavorite);
   //USERS
   app.get('/register', userControllerCallbacks.registerPage);
   app.post('/register', userControllerCallbacks.register);
