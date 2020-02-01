@@ -10,8 +10,8 @@ class MovieLayout extends React.Component {
             <div className="poster m-3" style={{backgroundImage: `url(${img})`}}></div></a>)
     });
     return (
-        <div>
-        <div className="row d-flex justify-content-center">
+        <div className="center">
+        <div className="row d-flex">
         {movieList}
         </div>
         </div>
