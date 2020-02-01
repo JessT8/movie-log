@@ -15,7 +15,11 @@ module.exports = (db) => {
     let password = request.body.password;
     let hashpassword = sha256(password+SALT);
     db.users.registerUser(username, hashpassword, (err,result)=>{
-        (err)?response.send(err):response.render("user/signin");
+                 let hashedCookie = sha256(SALT+user[0].id);
+                response.cookie('user_id', user[0].id);
+                response.cookie('username', user[0].username);
+                response.cookie('loggedIn', hashedCookie);
+        (err)?response.send(err):response.redirect("movie/");
     });
    }
 let signin = (request, response) => {
@@ -36,7 +40,6 @@ let signin = (request, response) => {
                 const data = { errmsg : "Your user name or password is invalid."};
                 response.send( data.errmsg);
             }else{
-                console.log(user);
                  let hashedCookie = sha256(SALT+user[0].id);
                 response.cookie('user_id', user[0].id);
                 response.cookie('username', user[0].username);
