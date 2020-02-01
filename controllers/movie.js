@@ -74,7 +74,15 @@ module.exports = (db) => {
 
 
   let getWatchlist = (request, response)=>{
-    response.send("watchlist");
+    let user_id = request.cookies.user_id;
+    db.movie.watchlist(user_id, (err, watchlist)=>{
+        if(err){
+            response.send("error: "+ err)
+        }else{
+            const data = {movies:watchlist}
+            response.render("watchlist/watchlist", data)
+        }
+    })
   }
    /**
    * ===========================================
