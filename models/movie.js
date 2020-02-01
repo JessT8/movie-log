@@ -81,11 +81,23 @@ module.exports = (dbPoolInstance) => {
         }
     })
   }
+  let addComplete = (userid, movieid, callback)=>{
+    let query = "UPDATE watchlist SET completed=$1 WHERE userid=$2 AND movieid=$3";
+    let values = [true, userid,movieid];
+    dbPoolInstance.query(query,values, (err)=>{
+        if(err){
+            callback(err);
+        }else{
+            callback(null);
+        }
+    })
+  }
   return {
     checkBookmark,
     addBookmark,
     checkMovies,
     watchlist,
-    addFavorites
+    addFavorites,
+    addComplete
   };
 };

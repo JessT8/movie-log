@@ -87,11 +87,22 @@ module.exports = (db) => {
     let movie_id = request.params.id;
     db.movie.addFavorites(user_id, movie_id, (err,watchlist)=>{
         if(err){
-            response.send("updateFavorite"+err);
+            response.send("updateFavorite: "+err);
         }else{
             response.redirect("/watchlist");
         }
     })
+  }
+    let updateComplete = (request, response)=>{
+        let user_id= request.cookies.user_id;
+        let movie_id = request.params.id;
+        db.movie.addComplete(user_id, movie_id, (err,watchlist)=>{
+            if(err){
+                response.send("updateComplete: "+err);
+            }else{
+                response.redirect("/watchlist");
+            }
+        })
   }
    /**
    * ===========================================
@@ -104,7 +115,8 @@ module.exports = (db) => {
     getMovie,
     bookmarkMovie,
     getWatchlist,
-    updateFavorite
+    updateFavorite,
+    updateComplete
   };
 
 }
