@@ -13,9 +13,11 @@
 }
 #bookmark{
 	color:white;
+	background-color: transparent;
 }
 #bookmark:hover{
 	color:#FFFF0A;
+	  cursor:pointer;
 }
 .poster2{
 	background-position:center;
