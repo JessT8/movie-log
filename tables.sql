@@ -21,5 +21,7 @@ CREATE TABLE IF NOT EXISTS movie(
 CREATE TABLE IF NOT EXISTS watchlist(
   id SERIAL PRIMARY KEY,
   movieid INTEGER,
-  userid INTEGER
+  userid INTEGER,
+  completed BOOLEAN DEFAULT false,
+  favorite BOOLEAN DEFAULT false
 );
