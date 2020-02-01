@@ -37,8 +37,8 @@ let signin = (request, response) => {
                 response.send( data.errmsg);
             }else{
                 console.log(user);
-                 let hashedCookie = sha256(SALT+user[0].userid);
-                response.cookie('user_id', user[0].userid);
+                 let hashedCookie = sha256(SALT+user[0].id);
+                response.cookie('user_id', user[0].id);
                 response.cookie('username', user[0].username);
                 response.cookie('loggedIn', hashedCookie);
                 response.redirect('/');
