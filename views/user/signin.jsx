@@ -22,6 +22,7 @@ class SignIn extends React.Component {
     <button type="submit" className="btn btn-primary btn-customized">Sign in</button>
     </div>
     </form>
+    <p>Don't have an account? <a href="/register">Sign up here</a></p>
     </div>
     </div>
     </div>

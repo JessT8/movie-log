@@ -14,7 +14,6 @@ class Register extends React.Component {
   <h1>Register</h1>
     <label htmlFor="name">Username</label>
     <input type="text" className="form-control" name="username" required/>
-    <p className="text-danger">{this.props.errmsg}</p>
     <label htmlFor="name">Password</label>
     <input type="password" className="form-control" name="password" required/>
     </div>
@@ -22,6 +21,7 @@ class Register extends React.Component {
     <button type="submit" className="btn btn-primary btn-customized">Register</button>
     </div>
     </form>
+     <p>Already have an account? <a href="/signin">Sign in here</a></p>
     </div>
     </div>
     </div>
