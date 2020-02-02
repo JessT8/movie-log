@@ -102,6 +102,17 @@ module.exports = (dbPoolInstance) => {
             callback(null, resultQuery.rows);
         }
     })
+  }
+  let getFavoriteMovies = (userid, callback)=>{
+    let query = "SELECT movie.movieid AS id, movie.poster AS poster_path FROM movie INNER JOIN watchlist ON (movie.movieid=watchlist.movieid) WHERE watchlist.userid=$1 AND watchlist.favorite=true"
+    let values = [userid];
+     dbPoolInstance.query(query,values, (err, resultQuery)=>{
+        if(err){
+            callback(err, null);
+        }else{
+            callback(null, resultQuery.rows);
+        }
+    })
 
   }
   return {
@@ -111,6 +122,7 @@ module.exports = (dbPoolInstance) => {
     watchlist,
     addFavorites,
     addComplete,
-    getCompletedMovies
+    getCompletedMovies,
+    getFavoriteMovies
   };
 };
