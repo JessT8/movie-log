@@ -152,3 +152,14 @@ width:"290px";
 .centercontent{
 	margin : 0 auto;
 }
+
+.pageNav{
+margin: 0 auto;
+width:100%;
+height:50px;
+background-color: #808080;
+border-radius: 25px;
+text-align: center;
+padding: 10px;
+font-size:20px;
+}

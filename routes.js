@@ -16,16 +16,17 @@ module.exports = (app, allModels) => {
   const movieControllerCallbacks = require('./controllers/movie')(allModels);
   const userControllerCallbacks = require('./controllers/user')(allModels);
   //movies
+  app.get("/", movieControllerCallbacks.redirect);
   app.get('/watchlist', movieControllerCallbacks.getWatchlist);
   app.get('/movies/:id/', movieControllerCallbacks.getMovie);
   app.post('/movies/:id', movieControllerCallbacks.bookmarkMovie);
-  app.get('/',movieControllerCallbacks.movielist);
+  app.get('/movies/upcoming/:num',movieControllerCallbacks.movielist);
   app.get('/about',movieControllerCallbacks.about);
   app.get('/completed',movieControllerCallbacks.completedMovies);
   app.get('/favorite',movieControllerCallbacks.favoriteMovies);
   app.post('/watchlist/:id/favorite', movieControllerCallbacks.updateFavorite);
   app.post('/watchlist/:id/complete', movieControllerCallbacks.updateComplete);
-    app.delete('/watchlist/:id/delete', movieControllerCallbacks.deleteMovie);
+  app.delete('/watchlist/:id/delete', movieControllerCallbacks.deleteMovie);
   //USERS
   app.get('/register', userControllerCallbacks.registerPage);
   app.post('/register', userControllerCallbacks.register);

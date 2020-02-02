@@ -8,7 +8,7 @@ class MovieList extends React.Component {
     return (
         <DefaultLayout title={this.props.pagetitle}>
         <NavLayout loggedIn={this.props.loggedIn}></NavLayout>
-        <MovieLayout movies={this.props.movies} header={this.props.header}></MovieLayout>
+        <MovieLayout movies={this.props.movies} header={this.props.header} nav={this.props.nav}></MovieLayout>
         </DefaultLayout>
     );
   }
