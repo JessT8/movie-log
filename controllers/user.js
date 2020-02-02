@@ -15,11 +15,11 @@ module.exports = (db) => {
     let password = request.body.password;
     let hashpassword = sha256(password+SALT);
     db.users.registerUser(username, hashpassword, (err,result)=>{
-                 let hashedCookie = sha256(SALT+user[0].id);
-                response.cookie('user_id', user[0].id);
-                response.cookie('username', user[0].username);
+        let hashedCookie = sha256(SALT+result[0].id);
+                response.cookie('user_id', result[0].id);
+                response.cookie('username', username);
                 response.cookie('loggedIn', hashedCookie);
-        (err)?response.send(err):response.redirect("movie/");
+        (err)?response.send(err):response.redirect("/");
     });
    }
 let signin = (request, response) => {
@@ -56,6 +56,20 @@ let signin = (request, response) => {
     response.redirect("/");
 }
 
+let getUsers = (request,response) =>{
+    let userid = request.cookies.user_id;
+    db.users.getPeople(userid,(error, users)=>{
+        if(error){
+            response.send("getUsers " + error );
+        }else{
+            const data = {
+                users,
+                loggedIn:"true"}
+            response.render("user/showusers", data);
+
+        }
+    })
+}
   /**
    * ===========================================
    * Export controller functions as a module
@@ -66,7 +80,8 @@ let signin = (request, response) => {
     register,
     signin,
     signingIn,
-    signout
+    signout,
+    getUsers
   };
 
 }
