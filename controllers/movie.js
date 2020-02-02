@@ -120,7 +120,28 @@ module.exports = (db) => {
                 header : "Completed Movies",
                 pagetitle : "Completed Movies"
             }
-            console.log(movies);
+            response.render("movies/movielist", data )
+        }
+    })
+        }else{
+            response.send("YOU ARE NOT LOGGED IN");
+        }
+
+  }
+    let favoriteMovies = (request,response)=>{
+    let loggedIn = isLoggedIn(request) ? "true":"false";
+    if(isLoggedIn(request)){
+    let user_id = request.cookies.user_id;
+    db.movie.getFavoriteMovies(user_id, (err, movies)=>{
+        if(err){
+            response.send("completedMovies :" + err);
+        }else{
+            const data= {
+                movies,
+                loggedIn:"true",
+                header : "Favorite Movies",
+                pagetitle : "Favorite Movies"
+            }
             response.render("movies/movielist", data )
         }
     })
@@ -142,7 +163,8 @@ module.exports = (db) => {
     getWatchlist,
     updateFavorite,
     updateComplete,
-    completedMovies
+    completedMovies,
+    favoriteMovies
   };
 
 }
