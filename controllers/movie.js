@@ -19,7 +19,9 @@ module.exports = (db) => {
     response.redirect(path);
    }
    let about = (request,response)=>{
-    response.send("About Page");
+     let loggedIn = (isLoggedIn(request))?"true": "false";
+     const data ={loggedIn};
+    response.render("credit", data);
    }
 
    let movielist = async (request,response)=>{
