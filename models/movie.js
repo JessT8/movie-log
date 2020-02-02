@@ -92,12 +92,25 @@ module.exports = (dbPoolInstance) => {
         }
     })
   }
+  let getCompletedMovies = (userid, callback)=>{
+    let query = "SELECT movie.movieid AS id, movie.poster AS poster_path FROM movie INNER JOIN watchlist ON (movie.movieid=watchlist.movieid) WHERE watchlist.userid=$1 AND watchlist.completed = true"
+    let values = [userid];
+     dbPoolInstance.query(query,values, (err, resultQuery)=>{
+        if(err){
+            callback(err, null);
+        }else{
+            callback(null, resultQuery.rows);
+        }
+    })
+
+  }
   return {
     checkBookmark,
     addBookmark,
     checkMovies,
     watchlist,
     addFavorites,
-    addComplete
+    addComplete,
+    getCompletedMovies
   };
 };
