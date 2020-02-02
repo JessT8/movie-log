@@ -24,7 +24,7 @@ module.exports = (dbPoolInstance) => {
     });
   };
   let getPeople = (userid, callback)=>{
-    let query = 'SELECT * FROM users WHERE NOT id=$1'
+    let query = 'SELECT * FROM users WHERE NOT EXISTS (SELECT * FROM follow WHERE follow.userid=users.id AND follow.followerid=$1 ) AND NOT users.id=$1';
     let values = [userid];
 
     dbPoolInstance.query(query, values, (error, queryResult)=>{
@@ -35,10 +35,22 @@ module.exports = (dbPoolInstance) => {
         }
     })
   }
+ let setFollowUser = (userid, followerid, callback)=>{
+    let query = `INSERT INTO follow (userid, followerid) VALUES($1,$2)`;
+    let values = [userid, followerid];
+    dbPoolInstance.query(query, values, (err)=>{
+        if(err){
+            callback(err);
+        }else{
+            callback(null);
+        }
+    })
+ }
   // `dbPoolInstance` is accessible within this function scope
   return {
     registerUser,
     validateUser,
-    getPeople
+    getPeople,
+    setFollowUser
   };
 };

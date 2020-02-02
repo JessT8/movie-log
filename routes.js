@@ -32,4 +32,5 @@ module.exports = (app, allModels) => {
   app.post('/signin', userControllerCallbacks.signingIn);
   app.get('/signout', userControllerCallbacks.signout);
   app.get('/people', userControllerCallbacks.getUsers);
+  app.post('/people/:id', userControllerCallbacks.followUser);
 };

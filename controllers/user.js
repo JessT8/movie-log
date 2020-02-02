@@ -70,6 +70,17 @@ let getUsers = (request,response) =>{
         }
     })
 }
+let followUser = (request, response)=>{
+    let userid = request.cookies.user_id;
+    let following = request.params.id;
+    db.users.setFollowUser(following, userid, (error)=>{
+        if(error){
+            response.send("fol;owUser " + error);
+        }else{
+            response.redirect('/people');
+        }
+    })
+}
   /**
    * ===========================================
    * Export controller functions as a module
@@ -81,7 +92,8 @@ let getUsers = (request,response) =>{
     signin,
     signingIn,
     signout,
-    getUsers
+    getUsers,
+    followUser
   };
 
 }
