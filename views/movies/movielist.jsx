@@ -6,9 +6,9 @@ var MovieLayout = require('../layouts/movieLayout');
 class MovieList extends React.Component {
   render() {
     return (
-        <DefaultLayout title="Movie">
+        <DefaultLayout title={this.props.pagetitle}>
         <NavLayout loggedIn={this.props.loggedIn}></NavLayout>
-        <MovieLayout movies={this.props.movies}></MovieLayout>
+        <MovieLayout movies={this.props.movies} header={this.props.header}></MovieLayout>
         </DefaultLayout>
     );
   }

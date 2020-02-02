@@ -8,7 +8,7 @@ class NavLayout extends React.Component {
   <button className="dropbtn">Me</button>
   <div className="dropdown-content">
     <a className="navLink" href="/watchlist">My watchlist</a>
-    <a className="navLink" href="#">Completed</a>
+    <a className="navLink" href="/completed">Completed</a>
   </div>
 </div><a className="nav-link mt-4 navLink" href="#">People</a><a className="nav-link mt-4 navLink" href="/">Movies</a><a className="nav-link mt-4 navLink" href="/about">About</a></div>);
     }else{

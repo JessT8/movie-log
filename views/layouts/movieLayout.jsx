@@ -11,6 +11,7 @@ class MovieLayout extends React.Component {
     });
     return (
         <div className="center">
+        <h2>{this.props.header}</h2>
         <div className="row d-flex">
         {movieList}
         </div>
