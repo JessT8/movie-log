@@ -11,7 +11,7 @@ class NavLayout extends React.Component {
     <a id="Favorite" className="navLink" href="/favorite">Favorites</a>
     <a id="Completed" className="navLink" href="/completed">Completed</a>
   </div>
-</div><a className="nav-link mt-4 navLink" href="#">People</a><a className="nav-link mt-4 navLink" href="/">Movies</a><a className="nav-link mt-4 navLink" href="/about">About</a></div>);
+</div><a className="nav-link mt-4 navLink" href="/people">People</a><a className="nav-link mt-4 navLink" href="/">Movies</a><a className="nav-link mt-4 navLink" href="/about">About</a></div>);
     }else{
           displayLogout =  (<div className="d-flex flex-row-reverse align-items-end"><a className="nav-link mt-4 navLink" href="/signin">Sign In</a><a className="nav-link mt-4 navLink" href="/">Movies</a><a className="nav-link mt-4 navLink" href="/about">About</a></div>);
     }
