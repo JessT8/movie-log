@@ -75,12 +75,40 @@ let followUser = (request, response)=>{
     let following = request.params.id;
     db.users.setFollowUser(following, userid, (error)=>{
         if(error){
-            response.send("fol;owUser " + error);
+            response.send("followUser " + error);
         }else{
             response.redirect('/people');
         }
     })
 }
+ let getFollowers = (request,response)=>{
+    let userid = request.cookies.user_id;
+    db.users.getUsersFollowers(userid, (err, following)=>{
+        if(err){
+            response.send("Get followers " + err);
+        }else{
+            const data = {
+                users: following,
+                loggedIn: "true"
+            }
+            response.render("user/showusers", data)
+        }
+    })
+ }
+ let getFollowed = (request, response)=>{
+    let userid = request.cookies.user_id;
+    db.users.getUserFollows(userid, (err, following)=>{
+        if(err){
+            response.send("Get followed " + err);
+        }else{
+            const data = {
+                users: following,
+                loggedIn: "true"
+            }
+            response.render("user/showusers", data)
+        }
+    })
+ }
   /**
    * ===========================================
    * Export controller functions as a module
@@ -93,7 +121,9 @@ let followUser = (request, response)=>{
     signingIn,
     signout,
     getUsers,
-    followUser
+    followUser,
+    getFollowers,
+    getFollowed
   };
 
 }

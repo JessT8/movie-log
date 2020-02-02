@@ -46,11 +46,32 @@ module.exports = (dbPoolInstance) => {
         }
     })
  }
+ let getUserFollows = (follower, callback)=>{
+  let query = 'SELECT * FROM users INNER JOIN follow ON (users.id = follow.userid) WHERE follow.followerid=$1';
+    let values = [follower];
+    dbPoolInstance.query(query, values, (error, queryResult) => {
+      if( error ){
+        callback(error,null);
+      }else{
+          callback(null,queryResult.rows);
+      }
+    });
+  };
+  let getUsersFollowers = (userid,callback)=>{
+    let query =  `SELECT * FROM users INNER JOIN follow ON(users.id = follow.followerid) WHERE follow.userid=$1`;
+    let values = [userid];
+    dbPoolInstance.query(query,values,(error,queryResult)=>{
+        (error)?callback(error,null):callback(null,queryResult.rows);
+    });
+  };
+
   // `dbPoolInstance` is accessible within this function scope
   return {
     registerUser,
     validateUser,
     getPeople,
-    setFollowUser
+    setFollowUser,
+    getUserFollows,
+    getUsersFollowers
   };
 };
