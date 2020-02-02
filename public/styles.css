@@ -19,6 +19,10 @@
 	border:0px;
 	padding:0px;
 }
+.profile{
+	height: 290px;
+	width: 290px
+}
 .watchlist{
 height:"500px";
 width:"290px";
@@ -134,5 +138,17 @@ width:"290px";
 }
 .center{
 	margin: 0 auto;
-	 width: 85%;
+	width: 85%;
+}
+.profilePic{
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:cover;
+	height:200px;
+	width:200px;
+	border-radius: 50%;
+	margin:0 auto;
+}
+.centercontent{
+	margin : 0 auto;
 }
