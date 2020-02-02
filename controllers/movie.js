@@ -150,6 +150,22 @@ module.exports = (db) => {
         }
 
   }
+let deleteMovie = (request,response)=>{
+  //  if(isLoggedIn(request)){
+        let movieid = request.params.id;
+        let userid = request.cookies.user_id;
+        db.movie.removeMovie(userid,movieid,(err)=>{
+            if(err){
+                response.status(500).send("Error");
+            }
+            console.log("deleted movie from watchlist");
+            response.redirect("/watchlist");
+        })
+   /*  }else{
+             response.redirect("/");
+     }*/
+  }
+
    /**
    * ===========================================
    * Export controller functions as a module
@@ -164,7 +180,8 @@ module.exports = (db) => {
     updateFavorite,
     updateComplete,
     completedMovies,
-    favoriteMovies
+    favoriteMovies,
+    deleteMovie
   };
 
 }

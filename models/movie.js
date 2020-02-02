@@ -113,8 +113,14 @@ module.exports = (dbPoolInstance) => {
             callback(null, resultQuery.rows);
         }
     })
-
   }
+  let removeMovie =( userid, movieid, callback)=>{
+    let query = `DELETE FROM watchlist WHERE movieid=$1 AND userid=$2`;
+    let values = [movieid, userid];
+     dbPoolInstance.query(query,values,(error) => {
+      (error)?callback(error):callback(null);
+    });
+  };
   return {
     checkBookmark,
     addBookmark,
@@ -123,6 +129,7 @@ module.exports = (dbPoolInstance) => {
     addFavorites,
     addComplete,
     getCompletedMovies,
-    getFavoriteMovies
+    getFavoriteMovies,
+    removeMovie
   };
 };

@@ -25,6 +25,7 @@ module.exports = (app, allModels) => {
   app.get('/favorite',movieControllerCallbacks.favoriteMovies);
   app.post('/watchlist/:id/favorite', movieControllerCallbacks.updateFavorite);
   app.post('/watchlist/:id/complete', movieControllerCallbacks.updateComplete);
+    app.delete('/watchlist/:id/delete', movieControllerCallbacks.deleteMovie);
   //USERS
   app.get('/register', userControllerCallbacks.registerPage);
   app.post('/register', userControllerCallbacks.register);

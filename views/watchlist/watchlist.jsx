@@ -11,7 +11,7 @@ class WatchList extends React.Component {
         let img = `https://image.tmdb.org/t/p/w500/${movie.poster}`;
         let movie_link = `/movies/${movie.movieid}`;
         let favoriteLink = `/watchlist/${movie.movieid}/favorite`;
-        let deleteLink = `/watchlist/${movie.movieid}/delete`;
+        let deleteLink = `/watchlist/${movie.movieid}/delete?_method=delete`;
         let completeLink = `/watchlist/${movie.movieid}/complete`;
         let favoriteClass = (movie.favorite)?"icon m-5 clickedHeart":"icon m-5 heart";
         let completeClass = (movie.completed)?"icon m-5 clickedTick":"icon m-5 tick";
