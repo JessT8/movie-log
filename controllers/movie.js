@@ -20,12 +20,14 @@ module.exports = (db) => {
    }
    let movielist = async (request,response)=>{
     let loggedIn = (isLoggedIn(request))?"true": "false";
-     const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1`;
+     const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1`;
      const movie_response = await fetch(url);
      const movie_data = await movie_response.json();
      const data = {
         movies:movie_data.results,
-        loggedIn};
+        loggedIn,
+                    header : "Upcoming Movies",
+                pagetitle : "Upcoming Movies"};
     response.render("movies/movielist", data);
    }
     let getMovie = async (request, response)=>{
@@ -104,6 +106,29 @@ module.exports = (db) => {
             }
         })
   }
+  let completedMovies = (request,response)=>{
+    let loggedIn = isLoggedIn(request) ? "true":"false";
+    if(isLoggedIn(request)){
+    let user_id = request.cookies.user_id;
+    db.movie.getCompletedMovies(user_id, (err, movies)=>{
+        if(err){
+            response.send("completedMovies :" + err);
+        }else{
+            const data= {
+                movies,
+                loggedIn:"true",
+                header : "Completed Movies",
+                pagetitle : "Completed Movies"
+            }
+            console.log(movies);
+            response.render("movies/movielist", data )
+        }
+    })
+        }else{
+            response.send("YOU ARE NOT LOGGED IN");
+        }
+
+  }
    /**
    * ===========================================
    * Export controller functions as a module
@@ -116,7 +141,8 @@ module.exports = (db) => {
     bookmarkMovie,
     getWatchlist,
     updateFavorite,
-    updateComplete
+    updateComplete,
+    completedMovies
   };
 
 }
