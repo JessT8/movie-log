@@ -1,5 +1,12 @@
 const sha256 = require('js-sha256');
 const SALT = "saltCookie";
+
+const isLoggedIn = (request) => {
+     let user_id = request.cookies.user_id;
+     let hashedCookie = sha256(SALT+user_id);
+     return ( request.cookies.loggedIn === hashedCookie) ? true : false;
+}
+
 module.exports = (db) => {
   /**
    * ===========================================
@@ -15,30 +22,39 @@ module.exports = (db) => {
     let password = request.body.password;
     let hashpassword = sha256(password+SALT);
     db.users.registerUser(username, hashpassword, (err,result)=>{
+        if(err){
+            if(err.code = 23505){
+                const data = {error : "Please choose another username"}
+                response.render("user/register", data)
+            }
+                else{
+                    response.send(err);
+                }
+        }else{
         let hashedCookie = sha256(SALT+result[0].id);
                 response.cookie('user_id', result[0].id);
                 response.cookie('username', username);
                 response.cookie('loggedIn', hashedCookie);
-        (err)?response.send(err):response.redirect("/");
+         }
     });
    }
 let signin = (request, response) => {
      const data = {errmsg: ""};
-    // (isLoggedIn(request))
-    // ? response.redirect("/") :
+    (isLoggedIn(request))
+    ? response.redirect("/") :
     response.render("user/signin", data);
   }
-   //sign user in
-   let signingIn = (request, response)=>{
+
+let signingIn = (request, response)=>{
   let username = request.body.username;
-    let password = sha256(request.body.password+SALT);
+  let password = sha256(request.body.password+SALT);
   db.users.validateUser(username,password,(error, user)=>{
     if(error){
       response.send(error);
         }else{
             if(user.length < 1){
-                const data = { errmsg : "Your user name or password is invalid."};
-                response.send( data.errmsg);
+                const data = { error : "Your user name or password is invalid."};
+                response.render("user/signin", data);
             }else{
                  let hashedCookie = sha256(SALT+user[0].id);
                 response.cookie('user_id', user[0].id);

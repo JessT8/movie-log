@@ -3,6 +3,10 @@ var DefaultLayout = require('../layouts/defaultLayout');
 var NavLayout = require('../layouts/navLayout');
 class Register extends React.Component {
   render() {
+     let errorMessage = "";
+    if(this.props.error){
+        errorMessage= (<div class="alert alert-danger text-center p-2" role="alert"><strong>!! {this.props.error}</strong>
+            </div>);}
     return (
         <DefaultLayout title="Register">
         <NavLayout></NavLayout>
@@ -11,6 +15,7 @@ class Register extends React.Component {
         <div className="col-10 col-md-8 col-lg-6">
 <form className="mt-5" method="POST" action="/register">
   <div className="form-group">
+  {errorMessage}
   <h1>Register</h1>
     <label htmlFor="name">Username</label>
     <input type="text" className="form-control" name="username" required/>

@@ -22,14 +22,14 @@ class MovieLayout extends React.Component {
         let link = `/movies/upcoming/${this.props.nav.next}`;
         next = <a className="ml-5 mr-5 glyphicon glyphicon-chevron-right" href={link}></a>
         }else{
-           next = <a className="ml-5 mr-5 glyphicon glyphicon-chevron-right"></a>
+           next = <p className="ml-5 mr-5 glyphicon glyphicon-chevron-right"></p>
         }
     let previous = "";
     if(this.props.nav.previous!== undefined){
         let link = `/movies/upcoming/${this.props.nav.previous}`;
         previous = <a className="ml-5 mr-5 glyphicon glyphicon-chevron-left" href={link}></a>
         }else{
-            previous = <a className="ml-5 mr-5 glyphicon glyphicon-chevron-left"></a>
+            previous = <p className="ml-5 mr-5 glyphicon glyphicon-chevron-left"></p>
         }
         displayPageNav = (<div className="pageNav mt-3 mb-5">{previous}<span className="ml-5 mr-5">Page {this.props.nav.current}</span>{next}</div>);
     }
