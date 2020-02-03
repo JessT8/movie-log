@@ -21,20 +21,21 @@ module.exports = (db) => {
     let username = request.body.username;
     let password = request.body.password;
     let hashpassword = sha256(password+SALT);
-    db.users.registerUser(username, hashpassword, (err,result)=>{
+    db.users.registerUser(username, hashpassword, (err,user)=>{
         if(err){
             if(err.code = 23505){
                 const data = {error : "Please choose another username"}
                 response.render("user/register", data)
             }
-                else{
+            else{
                     response.send(err);
                 }
         }else{
-        let hashedCookie = sha256(SALT+result[0].id);
-                response.cookie('user_id', result[0].id);
+        let hashedCookie = sha256(SALT+user[0].id);
+                response.cookie('user_id', user[0].id);
                 response.cookie('username', username);
                 response.cookie('loggedIn', hashedCookie);
+                response.redirect('/');
          }
     });
    }

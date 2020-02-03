@@ -20,10 +20,10 @@ class ShowFollow extends React.Component {
        userDisplay = (<div>No followed</div>)
     }
     return (
-        <DefaultLayout title="People">
+        <DefaultLayout title="Followed">
         <NavLayout loggedIn={this.props.loggedIn}></NavLayout>
         <div className="center">
-        <h2>People</h2>
+        <h2>Followed</h2>
         <div className="row d-flex">
         {userDisplay}
         </div>
