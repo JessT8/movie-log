@@ -7,7 +7,7 @@ const isLoggedIn = (request) => {
      let hashedCookie = sha256(SALT+user_id);
      return ( request.cookies.loggedIn === hashedCookie) ? true : false;
 }
-const getMovies = async (request,response, url, header ,pagetitle)=>{
+const getMovies = async (request,response, url, header ,pagetitle,link)=>{
      let loggedIn = (isLoggedIn(request))?"true": "false";
      const movie_response = await fetch(url);
      const movie_data = await movie_response.json();
@@ -24,7 +24,8 @@ const getMovies = async (request,response, url, header ,pagetitle)=>{
         nav:{pagination: true,
                     previous,
                     current: request.params.num,
-                    next
+                    next,
+                    link
                 }
             };
     response.render("movies/movielist", data);
@@ -54,21 +55,25 @@ module.exports = (db) => {
     const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=${page}`;
     let header =  "Upcoming Movies";
     let movietitle =  "Upcoming Movies";
-    getMovies(request,response,url, header, movietitle);
+    let link = '/movies/upcoming/';
+    getMovies(request,response,url, header, movietitle,link);
    }
    let popularMovies = (request,response)=>{
         let page = request.params.num;
-    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.MOVIE_API_KEY}&language=en-US&${page}`;
+    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=${page}`;
+    console.log(url);
         let header =  "Popular Movies";
     let movietitle =  "Popular Movies";
-    getMovies(request,response,url, header, movietitle);
+    let link = '/movies/popular/';
+    getMovies(request,response,url, header, movietitle, link);
    }
    let nowPlayingMovies = (request,response)=>{
     let page = request.params.num;
     const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=${page}`;
     let header =  "Now playing";
     let movietitle =  "Now playing";
-    getMovies(request,response,url, header, movietitle);
+    let link = '/movies/nowPlaying/';
+    getMovies(request,response,url, header, movietitle, link);
    }
 
    //Individual movie
