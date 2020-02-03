@@ -67,6 +67,7 @@ module.exports = (db) => {
     let link = '/movies/popular/';
     getMovies(request,response,url, header, movietitle, link);
    }
+
    let nowPlayingMovies = (request,response)=>{
     let page = request.params.num;
     const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=${page}`;
@@ -237,15 +238,18 @@ let getPersonWatchlist = (request,response)=>{
         if(err){
             response.send("error: "+ err)
         }else{
+            db.movie.getWatchlistUser(user_id, (err, users)=>{
              const data= {
                 movies:watchlist,
                 loggedIn:"true",
-                header : "Others' watchlist",
-                pagetitle : "Others' watchlist",
+                header : users[0].username+"'s watchlist",
+                pagetitle :  users[0].username+"'s watchlist",
                  pagination: false
             }
-            response.render("movies/movielist", data)
-        }
+
+            response.render("movies/movielist", data);
+            }
+         )};
     })}else{
           response.redirect('/signin');
     }
