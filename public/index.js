@@ -49,9 +49,40 @@ credit.classList.add("activeNav");
 credit.removeAttribute("href");
 break;
 case "Upcoming Movies":
+document.querySelector("#movieNav").classList.add("activeNav")
 const upcoming = document.querySelector("#upcoming");
 upcoming.classList.add("activeNav");
 upcoming.removeAttribute("href");
+break;
+case "Popular Movies":
+document.querySelector("#movieNav").classList.add("activeNav")
+const popular = document.querySelector("#popular");
+popular.classList.add("activeNav");
+popular.removeAttribute("href");
+break;
+case "Now playing":
+document.querySelector("#movieNav").classList.add("activeNav")
+const nowPlaying = document.querySelector("#nowPlaying");
+nowPlaying.classList.add("activeNav");
+nowPlaying.removeAttribute("href");
+break;
+case "People":
+document.querySelector("#peopleNav").classList.add("activeNav")
+const all = document.querySelector("#allPeople");
+all.classList.add("activeNav");
+all.removeAttribute("href");
+break;
+case "Followed":
+document.querySelector("#peopleNav").classList.add("activeNav")
+const followed = document.querySelector("#Followed");
+followed.classList.add("activeNav");
+followed.removeAttribute("href");
+break;
+case "Follower":
+document.querySelector("#peopleNav").classList.add("activeNav")
+const follower = document.querySelector("#Followers");
+follower.classList.add("activeNav");
+follower.removeAttribute("href");
 break;
 case "Sign in":
 const signin = document.querySelector("#signin");
@@ -61,3 +92,5 @@ break;
 default:
 break;
 }
+
+s();

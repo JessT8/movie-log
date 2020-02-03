@@ -5,9 +5,9 @@ var MovieLayout = require('../layouts/movieLayout');
 
 class UserList extends React.Component {
   render() {
-    let users = this.props.users;
     let userDisplay = "";
-    if(users !== undefined ){
+    if(this.props.users){
+    let users = this.props.users;
     userDisplay =  users.map((user)=>{
         let img = `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`;
         let followLink = `/people/${user.id}`;

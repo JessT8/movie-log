@@ -16,6 +16,7 @@ module.exports = (db) => {
    let registerPage = (request,response)=>{
     response.render("user/register");
    }
+
    //register user
    let register = (request,response)=>{
     let username = request.body.username;

@@ -58,6 +58,7 @@ module.exports = (dbPoolInstance) => {
         }
     })
   }
+
   let watchlist = (userid, callback)=>{
     let query = "SELECT DISTINCT movie.title, movie.movieid, movie.poster, movie.plot, watchlist.favorite, watchlist.completed, watchlist.userid  FROM movie INNER JOIN watchlist ON(watchlist.movieid=movie.movieid) WHERE watchlist.userid=$1";
     let values = [userid];

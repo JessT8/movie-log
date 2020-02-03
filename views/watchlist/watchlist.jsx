@@ -22,7 +22,8 @@ class WatchList extends React.Component {
             <div className="noanimationposter" style={{backgroundImage: `url(${img})`}}></div></a><div className="d-flex flex-row-reverse center"><form method="POST" action={completeLink}><button type="submit" className={completeClass}>&#10003;</button></form><form method="POST" action={favoriteLink}><button type="submit" className={favoriteClass}>&hearts;</button></form><form method="POST" action={deleteLink}><button type="submit" className="icon cross m-5">&#10005;</button></form></div></div>);
     });
     }else{
-          watchList = (<div>No movie added to watchlist</div>)
+          watchList = (<div style={{ margin:"0 auto", paddingTop:"100px"}}>
+        <div style={{border:"5px solid white", padding:"20px 10px"}}>Currently no movies in watchlist</div></div>)
     }
     return (
         <DefaultLayout title="My WatchList">

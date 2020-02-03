@@ -12,7 +12,8 @@ class MovieLayout extends React.Component {
             <div className="poster m-3" style={{backgroundImage: `url(${img})`}}></div></a>)
     });
     }else{
-        movieList = (<div>Currently no watchlist</div>)
+        movieList = (<div style={{ margin:"0 auto", paddingTop:"100px"}}>
+        <div style={{border:"5px solid white", padding:"20px 10px"}}>Currently no movies</div></div>);
     }
 
     let displayPageNav = ""

@@ -7,7 +7,28 @@ const isLoggedIn = (request) => {
      let hashedCookie = sha256(SALT+user_id);
      return ( request.cookies.loggedIn === hashedCookie) ? true : false;
 }
+const getMovies = async (request,response, url, header ,pagetitle)=>{
+     let loggedIn = (isLoggedIn(request))?"true": "false";
+     const movie_response = await fetch(url);
+     const movie_data = await movie_response.json();
+     let previous,next;
+     let current = parseInt(request.params.num);
+     previous = (current!==1) ? current-1: undefined;
+     next = (current < parseInt(movie_data.total_pages)-1)? current+1: undefined;
 
+     const data = {
+        movies:movie_data.results,
+        loggedIn,
+        header,
+        pagetitle,
+        nav:{pagination: true,
+                    previous,
+                    current: request.params.num,
+                    next
+                }
+            };
+    response.render("movies/movielist", data);
+}
 module.exports = (db) => {
   /**
    * ===========================================
@@ -23,30 +44,33 @@ module.exports = (db) => {
      const data ={loggedIn};
     response.render("credit", data);
    }
-
-   let movielist = async (request,response)=>{
+  /**
+   * ===========================================
+   * Retrieving Movies
+   * ===========================================
+   **/
+   let upcomingMovies = (request,response)=>{
     let page = request.params.num;
-    let loggedIn = (isLoggedIn(request))?"true": "false";
-     const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=${page}`;
-     const movie_response = await fetch(url);
-     const movie_data = await movie_response.json();
-     let previous,next;
-     let current = parseInt(request.params.num);
-     previous = (current!==1) ? current-1: undefined;
-     next = (current < parseInt(movie_data.total_pages)-1)? current+1: undefined;
-     const data = {
-        movies:movie_data.results,
-        loggedIn,
-        header : "Upcoming Movies",
-        pagetitle : "Upcoming Movies",
-        nav:{pagination: true,
-                    previous,
-                    current: request.params.num,
-                    next
-                }
-            };
-    response.render("movies/movielist", data);
+    const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=${page}`;
+    let header =  "Upcoming Movies";
+    let movietitle =  "Upcoming Movies";
+    getMovies(request,response,url, header, movietitle);
    }
+   let popularMovies = (request,response)=>{
+        let page = request.params.num;
+    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.MOVIE_API_KEY}&language=en-US&${page}`;
+        let header =  "Popular Movies";
+    let movietitle =  "Popular Movies";
+    getMovies(request,response,url, header, movietitle);
+   }
+   let nowPlayingMovies = (request,response)=>{
+    let page = request.params.num;
+    const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=${page}`;
+    let header =  "Now playing";
+    let movietitle =  "Now playing";
+    getMovies(request,response,url, header, movietitle);
+   }
+
    //Individual movie
     let getMovie = async (request, response)=>{
         let loggedIn = (isLoggedIn(request))?"true": "false";
@@ -66,7 +90,16 @@ module.exports = (db) => {
             response.render("movies/movie",data);
             });
     }
-
+  /**
+   * ===========================================
+   * End of retrieving Movies
+   * ===========================================
+   **/
+     /**
+   * ===========================================
+   * Watchlist Bookmark
+   * ===========================================
+   **/
     let bookmarkMovie = (request, response) =>{
         let loggedIn = (isLoggedIn(request))?"true": "false";
         console.log("Controller bookmarkMovie");
@@ -219,7 +252,9 @@ let getPersonWatchlist = (request,response)=>{
    */
   return {
     redirect,
-    movielist,
+    upcomingMovies,
+    popularMovies,
+    nowPlayingMovies,
     about,
     getMovie,
     bookmarkMovie,
