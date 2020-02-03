@@ -66,6 +66,8 @@ const allUserModelsFunction = require('./models/user');
 const userModelsObject = allUserModelsFunction( pool );
 const allMovieModelsFunction = require('./models/movie');
 const movieModelsObject = allMovieModelsFunction( pool );
+const allMovieListModelsFunction = require('./models/movie');
+const movieListModelsObject = allMovieListModelsFunction( pool );
 
 
 
@@ -95,5 +97,6 @@ module.exports = {
    * ADD APP MODELS HERE
    */
   movie: movieModelsObject,
+  movielist : movieListModelsObject,
   users: userModelsObject
 };

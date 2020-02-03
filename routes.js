@@ -14,22 +14,24 @@ module.exports = (app, allModels) => {
 
   // require the controller
   const movieControllerCallbacks = require('./controllers/movie')(allModels);
+  const movielistControllerCallbacks = require('./controllers/movielist')(allModels);
   const userControllerCallbacks = require('./controllers/user')(allModels);
   //movies
   app.get("/", movieControllerCallbacks.redirect);
-  app.get('/people/watchlist/:id', movieControllerCallbacks.getPersonWatchlist);
-  app.get('/watchlist', movieControllerCallbacks.getWatchlist);
-  app.get('/movies/:id/', movieControllerCallbacks.getMovie);
-  app.post('/movies/:id', movieControllerCallbacks.bookmarkMovie);
+  app.get('/credits',movieControllerCallbacks.about);
   app.get('/movies/upcoming/:num',movieControllerCallbacks.upcomingMovies);
   app.get('/movies/popular/:num',movieControllerCallbacks.popularMovies);
   app.get('/movies/nowPlaying/:num',movieControllerCallbacks.nowPlayingMovies);
-  app.get('/credits',movieControllerCallbacks.about);
-  app.get('/completed',movieControllerCallbacks.completedMovies);
-  app.get('/favorite',movieControllerCallbacks.favoriteMovies);
-  app.post('/watchlist/:id/favorite', movieControllerCallbacks.updateFavorite);
-  app.post('/watchlist/:id/complete', movieControllerCallbacks.updateComplete);
-  app.delete('/watchlist/:id/delete', movieControllerCallbacks.deleteMovie);
+  app.get('/movies/:id/', movieControllerCallbacks.getMovie);
+  //Movie list
+  app.get('/people/watchlist/:id', movielistControllerCallbacks.getPersonWatchlist);
+  app.get('/watchlist', movielistControllerCallbacks.getWatchlist);
+  app.post('/movies/:id', movielistControllerCallbacks.bookmarkMovie);
+  app.post('/watchlist/:id/favorite', movielistControllerCallbacks.updateFavorite);
+  app.post('/watchlist/:id/complete', movielistControllerCallbacks.updateComplete);
+  app.get('/completed',movielistControllerCallbacks.completedMovies);
+  app.get('/favorite',movielistControllerCallbacks.favoriteMovies);
+  app.delete('/watchlist/:id/delete', movielistControllerCallbacks.deleteMovie);
   //Users
   app.get('/register', userControllerCallbacks.registerPage);
   app.post('/register', userControllerCallbacks.register);

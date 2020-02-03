@@ -25,6 +25,8 @@ class MovieLayout extends React.Component {
         }else{
            next = <p className="ml-5 mr-5 glyphicon glyphicon-chevron-right"></p>
         }
+
+
     let previous = "";
     if(this.props.nav.previous!== undefined){
         let link = `${this.props.nav.link}${this.props.nav.previous}`;
@@ -34,6 +36,7 @@ class MovieLayout extends React.Component {
         }
         displayPageNav = (<div className="pageNav mt-3 mb-5">{previous}<span className="ml-5 mr-5">Page {this.props.nav.current}</span>{next}</div>);
     }
+
     return (
         <div className="center">
         <h2>{this.props.header}</h2>

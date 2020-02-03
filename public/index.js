@@ -92,5 +92,3 @@ break;
 default:
 break;
 }
-
-s();
