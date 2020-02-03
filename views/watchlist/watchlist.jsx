@@ -5,8 +5,9 @@ var NavLayout = require('../layouts/navLayout');
 class WatchList extends React.Component {
   render() {
     let watchList = "";
-    let movies = this.props.movies;
-    if(movies !== undefined ){
+
+    if(this.props.movies){
+        let movies = this.props.movies;
     watchList =  movies.map((movie)=>{
         let img = `https://image.tmdb.org/t/p/w500/${movie.poster}`;
         let movie_link = `/movies/${movie.movieid}`;

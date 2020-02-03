@@ -17,6 +17,7 @@ module.exports = (app, allModels) => {
   const userControllerCallbacks = require('./controllers/user')(allModels);
   //movies
   app.get("/", movieControllerCallbacks.redirect);
+  app.get('/people/watchlist/:id', movieControllerCallbacks.getPersonWatchlist);
   app.get('/watchlist', movieControllerCallbacks.getWatchlist);
   app.get('/movies/:id/', movieControllerCallbacks.getMovie);
   app.post('/movies/:id', movieControllerCallbacks.bookmarkMovie);
@@ -27,13 +28,14 @@ module.exports = (app, allModels) => {
   app.post('/watchlist/:id/favorite', movieControllerCallbacks.updateFavorite);
   app.post('/watchlist/:id/complete', movieControllerCallbacks.updateComplete);
   app.delete('/watchlist/:id/delete', movieControllerCallbacks.deleteMovie);
-  //USERS
+  //Users
   app.get('/register', userControllerCallbacks.registerPage);
   app.post('/register', userControllerCallbacks.register);
   app.get('/signin', userControllerCallbacks.signin);
   app.post('/signin', userControllerCallbacks.signingIn);
   app.get('/signout', userControllerCallbacks.signout);
   app.get('/people', userControllerCallbacks.getUsers);
+  //Follow
   app.get('/followed', userControllerCallbacks.getFollowed);
   app.get('/followers', userControllerCallbacks.getFollowers);
   app.post('/people/:id', userControllerCallbacks.followUser);

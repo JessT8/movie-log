@@ -18,9 +18,9 @@ class NavLayout extends React.Component {
     <a id="Followed" className="navLink" href="/followed">Followed</a>
     <a id="Followers" className="navLink" href="/followers">Followers</a>
   </div>
-</div><a className="nav-link mt-4 navLink" href="/">Movies</a><a className="nav-link mt-4 navLink" href="/credits">Credits</a></div>);
+</div><a className="nav-link mt-4 navLink" id="upcoming" href="/">Movies</a><a className="nav-link mt-4 navLink" id="credit" href="/credits">Credits</a></div>);
     }else{
-          displayLogout =  (<div className="d-flex flex-row-reverse align-items-end"><a className="nav-link mt-4 navLink" href="/signin">Sign In</a><a className="nav-link mt-4 navLink" href="/">Movies</a><a className="nav-link mt-4 navLink"  href="/credits">Credits</a></div>);
+          displayLogout =  (<div className="d-flex flex-row-reverse align-items-end"><a className="nav-link mt-4 navLink" id="signin" href="/signin">Sign In</a><a className="nav-link mt-4 navLink" id="upcoming" href="/">Movies</a><a className="nav-link mt-4 navLink"  id="credit" href="/credits">Credits</a></div>);
     }
 
     return (

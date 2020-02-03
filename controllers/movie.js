@@ -192,7 +192,26 @@ let deleteMovie = (request,response)=>{
               response.redirect('/signin');
      }
   }
-
+let getPersonWatchlist = (request,response)=>{
+  if(isLoggedIn(request)){
+    let user_id = request.params.id;
+    db.movie.individualWatchlist(user_id, (err, watchlist)=>{
+        if(err){
+            response.send("error: "+ err)
+        }else{
+             const data= {
+                movies:watchlist,
+                loggedIn:"true",
+                header : "Others' watchlist",
+                pagetitle : "Others' watchlist",
+                 pagination: false
+            }
+            response.render("movies/movielist", data)
+        }
+    })}else{
+          response.redirect('/signin');
+    }
+}
    /**
    * ===========================================
    * Export controller functions as a module
@@ -209,7 +228,8 @@ let deleteMovie = (request,response)=>{
     updateComplete,
     completedMovies,
     favoriteMovies,
-    deleteMovie
+    deleteMovie,
+    getPersonWatchlist
   };
 
 }

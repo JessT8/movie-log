@@ -43,6 +43,21 @@ const watchlist = document.querySelector("#Watchlist");
 watchlist.classList.add("activeNav");
 watchlist.removeAttribute("href");
 break;
+case "Credit":
+const credit = document.querySelector("#credit");
+credit.classList.add("activeNav");
+credit.removeAttribute("href");
+break;
+case "Upcoming Movies":
+const upcoming = document.querySelector("#upcoming");
+upcoming.classList.add("activeNav");
+upcoming.removeAttribute("href");
+break;
+case "Sign in":
+const signin = document.querySelector("#signin");
+signin.classList.add("activeNav");
+signin.removeAttribute("href");
+break;
 default:
 break;
 }

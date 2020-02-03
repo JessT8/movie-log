@@ -114,6 +114,18 @@ module.exports = (dbPoolInstance) => {
         }
     })
   }
+  let individualWatchlist = (userid, callback)=>{
+    let query = "SELECT DISTINCT movie.movieid AS id, movie.poster AS poster_path, watchlist.userid  FROM movie INNER JOIN watchlist ON(watchlist.movieid=movie.movieid) WHERE watchlist.userid=$1";
+    let values = [userid];
+    dbPoolInstance.query(query, values, (err,resultQuery)=>{
+        if(err){
+            callback(err,null);
+        }else{
+            (resultQuery.rows.length>0)?callback(null, resultQuery.rows):
+                callback(null,null);
+        }
+    });
+  }
   let removeMovie =( userid, movieid, callback)=>{
     let query = `DELETE FROM watchlist WHERE movieid=$1 AND userid=$2`;
     let values = [movieid, userid];
@@ -130,6 +142,7 @@ module.exports = (dbPoolInstance) => {
     addComplete,
     getCompletedMovies,
     getFavoriteMovies,
-    removeMovie
+    removeMovie,
+    individualWatchlist
   };
 };

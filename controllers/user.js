@@ -91,7 +91,7 @@ let followUser = (request, response)=>{
                 users: following,
                 loggedIn: "true"
             }
-            response.render("user/showusers", data)
+            response.render("user/showfollower", data)
         }
     })
  }
@@ -105,7 +105,7 @@ let followUser = (request, response)=>{
                 users: following,
                 loggedIn: "true"
             }
-            response.render("user/showusers", data)
+            response.render("user/showfollow", data)
         }
     })
  }
