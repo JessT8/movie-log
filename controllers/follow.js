@@ -15,7 +15,7 @@ module.exports = (db) => {
    */
 let getUsers = (request,response) =>{
     let userid = request.cookies.user_id;
-    db.users.getPeople(userid,(error, users)=>{
+    db.follow.getPeople(userid,(error, users)=>{
         if(error){
             response.send("getUsers " + error );
         }else{
@@ -30,7 +30,7 @@ let getUsers = (request,response) =>{
 let followUser = (request, response)=>{
     let userid = request.cookies.user_id;
     let following = request.params.id;
-    db.users.setFollowUser(following, userid, (error)=>{
+    db.follow.setFollowUser(following, userid, (error)=>{
         if(error){
             response.send("followUser " + error);
         }else{
@@ -40,7 +40,7 @@ let followUser = (request, response)=>{
 }
  let getFollowers = (request,response)=>{
     let userid = request.cookies.user_id;
-    db.users.getUsersFollowers(userid, (err, following)=>{
+    db.follow.getUsersFollowers(userid, (err, following)=>{
         if(err){
             response.send("Get followers " + err);
         }else{
@@ -54,7 +54,7 @@ let followUser = (request, response)=>{
  }
  let getFollowed = (request, response)=>{
     let userid = request.cookies.user_id;
-    db.users.getUserFollows(userid, (err, following)=>{
+    db.follow.getUserFollows(userid, (err, following)=>{
         if(err){
             response.send("Get followed " + err);
         }else{

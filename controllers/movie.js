@@ -61,7 +61,6 @@ module.exports = (db) => {
    let popularMovies = (request,response)=>{
         let page = request.params.num;
     const url = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=${page}`;
-    console.log(url);
         let header =  "Popular Movies";
     let movietitle =  "Popular Movies";
     let link = '/movies/popular/';
