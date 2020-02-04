@@ -52,6 +52,7 @@ const heartClick = (e)=>{
 }
 heart.map(h=>h.addEventListener("click",heartClick));
 }
+
 const movielist = document.querySelector("#movielist");
 //Highlight navigation
 switch(document.title){

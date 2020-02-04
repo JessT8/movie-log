@@ -1,6 +1,6 @@
-var React = require('react');
-var DefaultLayout = require('./layouts/defaultLayout');
-var NavLayout = require('./layouts/navLayout');
+var React = require("react");
+var DefaultLayout = require('../layouts/defaultLayout');
+var NavLayout = require('../layouts/navLayout');
 class Credit extends React.Component {
   render() {
             let img = (this.props.check!== undefined)? this.props.img:`https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`;

@@ -107,7 +107,7 @@ let followUser = (request, response)=>{
         }else{
             const data = {
                 users: following,
-                loggedIn: "true"
+                loggedIn: "true",
             }
             response.render("user/showfollower", data)
         }
@@ -128,15 +128,50 @@ let followUser = (request, response)=>{
     })
  }
  let profile = (request, response)=>{
-    response.render("test");
- }
-let testPost = (request, response)=>{
-  cloudinary.uploader.upload(request.file.path, function(result) {
-    response.send(result);
-  }, {
- folder: 'Profile_pics',
- use_filename: true
-});
+        let userid = request.cookies.user_id;
+   db.users.getProfile(userid,(err, img)=>{
+    if(err){
+            response.send("Upload profile" + err);
+        }else{
+                const data = {
+                    img:`https://res.cloudinary.com/do3q60bdd/image/upload/v${img[0].version}/${img[0].public_id}.png`
+                    }
+    response.render("user/profile",data);}});
+ };
+let uploadProfile = (request, response)=>{
+    let userid = request.cookies.user_id;
+db.users.getProfile(userid,(err, img)=>{
+    if(err){
+            response.send("Upload profile" + err);
+        }else{
+            //if results
+            if(img[0].public_id){
+               cloudinary.uploader.destroy(img[0].public_id, function(res){
+                console.log("done");
+                console.log(res);
+            })}
+            cloudinary.uploader.upload(request.file.path, function(result) {
+                let res = result;
+console.log(res);
+                db.users.uploadProfile(res.version, res.public_id,userid,(error)=>{
+                const data = {
+                    check:img[0].public_id,
+                    img:`https://res.cloudinary.com/do3q60bdd/image/upload/v${res.version}/${res.public_id}.png`
+                    }
+
+            response.render("user/profile", data)
+             });
+            }, {
+                folder: 'Profile_pics',
+                use_filename: true
+            });
+        }
+})
+
+
+
+
+
  }
   /**
    * ===========================================
@@ -154,7 +189,7 @@ let testPost = (request, response)=>{
     getFollowers,
     getFollowed,
     profile,
-    testPost
+    uploadProfile
   };
 
 }

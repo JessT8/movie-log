@@ -2,6 +2,8 @@ CREATE TABLE IF NOT EXISTS users(
   id SERIAL PRIMARY KEY,
   username TEXT,
   password TEXT,
+  version TEXT,
+  public_id TEXT,
   UNIQUE(username)
 );
 

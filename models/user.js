@@ -34,11 +34,35 @@ module.exports = (dbPoolInstance) => {
         }
     });
   };
-
+let getProfile = (userid, callback)=>{
+    let query = `SELECT * FROM users WHERE id=$1`;
+    let values = [userid];
+     dbPoolInstance.query(query, values, (error, queryResult) => {
+ if(error){
+            callback(error,null);
+        }else{
+            callback(null, queryResult.rows);
+        }
+    });
+  };
+  let uploadProfile = (ver, public_id,userid, callback)=>{
+    console.log(userid);
+    let query = `UPDATE users SET version=$1, public_id=$2 WHERE id=$3`;
+    let values = [ver, public_id,userid];
+     dbPoolInstance.query(query, values, (error) => {
+    if(error){
+            callback(error);
+        }else{
+            callback(null);
+        }
+    });
+  };
   // `dbPoolInstance` is accessible within this function scope
   return {
     registerUser,
     validateUser,
-    getPeople
+    getPeople,
+    getProfile,
+    uploadProfile
   };
 };
