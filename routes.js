@@ -42,7 +42,7 @@ module.exports = (app, allModels) => {
   app.post('/signin', userControllerCallbacks.signingIn);
   app.get('/signout', userControllerCallbacks.signout);
   app.get('/people', userControllerCallbacks.getUsers);
-  app.get('/test', userControllerCallbacks.test);
+  app.get('/profile', userControllerCallbacks.profile);
   app.post('/test',upload.single('myFile'), userControllerCallbacks.testPost);
 //   app.post('/people/:id', upload.single('myFile'), function(req, res) {
 //   cloudinary.uploader.upload(req.file.path, function(result) {

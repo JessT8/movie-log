@@ -11,15 +11,13 @@ class PersonalList extends React.Component {
     movielist =  movies.map((movie)=>{
         let img = `https://image.tmdb.org/t/p/w500/${movie.poster}`;
         let movie_link = `/movies/${movie.movieid}`;
-        let favoriteLink = `/movielist/${movie.movieid}/favorite`;
         let deleteLink = `/movielist/${movie.movieid}/delete?_method=delete`;
-        let completeLink = `/movielist/${movie.movieid}/complete`;
         let favoriteClass = (movie.favorite)?"icon m-5 clickedHeart":"icon m-5 heart";
         let completeClass = (movie.completed)?"icon m-5 clickedTick":"icon m-5 tick";
         return (
             <div className="m-3 movielist">
             <a href={movie_link}>
-            <div className="poster" style={{backgroundImage: `url(${img})`}}></div></a><div className="d-flex flex-row-reverse center"><form method="POST" action={completeLink}><button type="submit" className={completeClass}>&#10003;</button></form><form method="POST" action={favoriteLink}><button type="submit" className={favoriteClass}>&hearts;</button></form><form method="POST" action={deleteLink}><button type="submit" className="icon cross m-5">&#10005;</button></form></div></div>);
+            <div className="poster" style={{backgroundImage: `url(${img})`}}></div></a><div className="d-flex flex-row-reverse center"><button className={completeClass} value={movie.movieid}>&#10003;</button><button value={movie.movieid} className={favoriteClass}>&hearts;</button><form method="POST" action={deleteLink}><button type="submit" className="icon cross m-5">&#10005;</button></form></div></div>);
     });
     }else{
           movielist = (<div style={{ margin:"0 auto", paddingTop:"100px"}}>

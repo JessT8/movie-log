@@ -75,6 +75,7 @@ module.exports = (db) => {
         }
       }
   let updateFavorite = (request, response)=>{
+        console.log("Adding favorites");
     if(isLoggedIn(request)){
     let user_id= request.cookies.user_id;
     let movie_id = request.params.id;

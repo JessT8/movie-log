@@ -1,6 +1,5 @@
-
+console.log("In client side script");
 const ticks = document.querySelectorAll(".tick");
-const tick = Array.from(ticks);
 const hearts = document.querySelectorAll('.heart');
 const heart = Array.from(hearts);
 const bookmark = document.querySelector(".bookmark");
@@ -9,11 +8,11 @@ const bookmarked = document.querySelector(".bookmarked");
 if(bookmark){
 const bookmarkClick= ()=>{
     console.log("Setting bookmark");
-    var request = new XMLHttpRequest();
+    let request = new XMLHttpRequest();
     bookmark.classList.remove("bookmark");
     bookmark.classList.add("bookmarked");
     bookmark.disabled = true;
-    var url = "/movies/"+parseInt(bookmark.value);
+    let url = "/movies/"+parseInt(bookmark.value);
     request.open("POST", url);
     request.addEventListener("load", function(response){
         console.log(this.responseText);
@@ -27,21 +26,30 @@ bookmark.addEventListener("click", bookmarkClick);
 }else if(bookmarked){
 bookmarked.disabled = true;
 }
+if(ticks){
 const tickClick = (e) =>{
     console.log("setting tick");
+    let request = new XMLHttpRequest();
     e.target.classList.remove("tick");
     e.target.classList.add("clickedTick");
+    e.target.disabled = true;
+    let url = `/movielist/${e.target.value}/complete`;
+    request.open("POST", url);
+    request.send();
 }
-
-const heartClick = (e)=>{
-    console.log("setting heart");
-    e.target.classList.remove("icon");
-    e.target.classList.add("clickedHeart");
-}
-if(ticks){
+const tick = Array.from(ticks);
 tick.map(t=>t.addEventListener("click", tickClick));
 }
 if(hearts){
+const heartClick = (e)=>{
+    console.log("setting heart"); let request = new XMLHttpRequest();
+    e.target.classList.remove("icon");
+    e.target.classList.add("clickedHeart");
+    e.target.disabled = true;
+    let url = `/movielist/${e.target.value}/favorite`;
+    request.open("POST", url);
+    request.send();
+}
 heart.map(h=>h.addEventListener("click",heartClick));
 }
 const movielist = document.querySelector("#movielist");

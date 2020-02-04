@@ -127,7 +127,7 @@ let followUser = (request, response)=>{
         }
     })
  }
- let test = (request, response)=>{
+ let profile = (request, response)=>{
     response.render("test");
  }
 let testPost = (request, response)=>{
@@ -153,7 +153,7 @@ let testPost = (request, response)=>{
     followUser,
     getFollowers,
     getFollowed,
-    test,
+    profile,
     testPost
   };
 

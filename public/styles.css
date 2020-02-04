@@ -37,6 +37,7 @@ width:"290px";
 	cursor: default;
 		background-color: transparent;
 			border:0px;
+				padding:0px;
 			  pointer-events:none;
 }
 .clickedHeart{
@@ -45,6 +46,7 @@ width:"290px";
 	cursor: default;
 	background-color: transparent;
 		border:0px;
+			padding:0px;
 		  pointer-events:none;
 }
 .tick:hover{
