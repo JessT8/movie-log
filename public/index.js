@@ -44,26 +44,32 @@ tick.map(t=>t.addEventListener("click", tickClick));
 if(hearts){
 heart.map(h=>h.addEventListener("click",heartClick));
 }
-
+const movielist = document.querySelector("#movielist");
 //Highlight navigation
 switch(document.title){
 case "Completed Movies":
 document.querySelector("#meNav").classList.add("activeNav");
-const complete = document.querySelector("#Completed");
-complete.classList.add("activeNav");
-complete.removeAttribute("href");
+const completed = document.querySelector("#completed");
+movielist.classList.add("activeNav");
+movielist.removeAttribute("href");
+completed.classList.add("activeNav");
+completed.removeAttribute("href");
 break;
 case "Favorite Movies":
 document.querySelector("#meNav").classList.add("activeNav");
-const favorite = document.querySelector("#Favorite");
+const favorite = document.querySelector("#favorite");
+movielist.classList.add("activeNav");
+movielist.removeAttribute("href");
 favorite.classList.add("activeNav");
 favorite.removeAttribute("href");
 break;
-case "My WatchList":
+case "My Movie List":
 document.querySelector("#meNav").classList.add("activeNav");
-const watchlist = document.querySelector("#Watchlist");
-watchlist.classList.add("activeNav");
-watchlist.removeAttribute("href");
+movielist.classList.add("activeNav");
+movielist.removeAttribute("href");
+const allMovie = document.querySelector("#allMovie");
+allMovie.classList.add("activeNav");
+allMovie.removeAttribute("href");
 break;
 case "Credit":
 const credit = document.querySelector("#credit");
@@ -94,7 +100,7 @@ const all = document.querySelector("#allPeople");
 all.classList.add("activeNav");
 all.removeAttribute("href");
 break;
-case "Followed":
+case "Follow":
 document.querySelector("#peopleNav").classList.add("activeNav")
 const followed = document.querySelector("#Followed");
 followed.classList.add("activeNav");

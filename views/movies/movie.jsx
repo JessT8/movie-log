@@ -18,6 +18,9 @@ class Movie extends React.Component {
     let videos= this.props.movie.videos.results;
     let key = videos.filter(video => video.type === 'Trailer');
     let videoSrc = `https://www.youtube.com/embed/${key[0].key}`;
+    let options = {year: 'numeric', month: 'long', day: 'numeric' };
+    let releasedate  = new Date(this.props.movie.release_date);
+    let displayDate = releasedate.toLocaleDateString("en-GB", options);
 
     return (
         <DefaultLayout title={this.props.movie.title}>
@@ -30,7 +33,9 @@ class Movie extends React.Component {
         </div>
         <div className="col">
         {bookmark}
-        <p>{this.props.movie.overview}</p>
+        <p>Overview: {this.props.movie.overview}</p>
+        <p>Status: {this.props.movie.status}</p>
+        <p>Release date: {displayDate}</p>
         </div>
         </div>
         </DefaultLayout>

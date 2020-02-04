@@ -24,8 +24,8 @@ module.exports = (db) => {
              const data= {
                 movies:watchlist,
                 loggedIn:"true",
-                header : users[0].username+"'s watchlist",
-                pagetitle :  users[0].username+"'s watchlist",
+                header : users[0].username+"'s Movie List",
+                pagetitle :  users[0].username+"'s Movie List",
                  pagination: false
             }
 
@@ -36,14 +36,19 @@ module.exports = (db) => {
           response.redirect('/signin');
     }
 }
-  let getWatchlist = (request, response)=>{
+  let movielist = (request, response)=>{
      if(isLoggedIn(request)){
     let user_id = request.cookies.user_id;
-    db.movielist.watchlist(user_id, (err, watchlist)=>{
+    db.movielist.movielist(user_id, (err, movielist)=>{
         if(err){
             response.send("error: "+ err)
         }else{
-            const data = {movies:watchlist}
+            const data = {
+                movies:movielist,
+                header: "My Movie List",
+                title: "My Movie List",
+                loggedIn:"true"
+            }
             response.render("watchlist/watchlist", data)
         }
     })}else{
@@ -77,7 +82,7 @@ module.exports = (db) => {
         if(err){
             response.send("updateFavorite: "+err);
         }else{
-            response.redirect("/watchlist");
+            response.redirect("/movielist");
         }
     });}else{
            response.redirect('/signin');
@@ -91,7 +96,7 @@ module.exports = (db) => {
             if(err){
                 response.send("updateComplete: "+err);
             }else{
-                response.redirect("/watchlist");
+                response.redirect("/movielist");
             }
         })}else{
                 response.redirect('/signin');
@@ -110,9 +115,8 @@ module.exports = (db) => {
                 loggedIn:"true",
                 header : "Completed Movies",
                 pagetitle : "Completed Movies",
-                pagination: false
             }
-            response.render("movies/movielist", data )
+            response.render("watchlist/watchlist", data )
         }
     })
         }else{
@@ -133,9 +137,8 @@ module.exports = (db) => {
                 loggedIn:"true",
                 header : "Favorite Movies",
                 pagetitle : "Favorite Movies",
-                 pagination: false
             }
-            response.render("movies/movielist", data )
+            response.render("watchlist/watchlist", data )
         }
     })
         }else{
@@ -152,7 +155,7 @@ let deleteMovie = (request,response)=>{
                 response.status(500).send("Error");
             }
             console.log("deleted movie from watchlist");
-            response.redirect("/watchlist");
+            response.redirect("/movielist");
         })
     }else{
               response.redirect('/signin');
@@ -161,7 +164,7 @@ let deleteMovie = (request,response)=>{
 
   return {
     getPersonWatchlist,
-    getWatchlist,
+    movielist,
     bookmarkMovie,
     updateFavorite,
     updateComplete,

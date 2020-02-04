@@ -27,14 +27,14 @@ module.exports = (app, allModels) => {
   app.get('/movies/nowPlaying/:num',movieControllerCallbacks.nowPlayingMovies);
   app.get('/movies/:id/', movieControllerCallbacks.getMovie);
   //Movie list
-  app.get('/people/watchlist/:id', movielistControllerCallbacks.getPersonWatchlist);
-  app.get('/watchlist', movielistControllerCallbacks.getWatchlist);
+  app.get('/people/movielist/:id', movielistControllerCallbacks.getPersonWatchlist);
+  app.get('/movielist', movielistControllerCallbacks.movielist);
   app.post('/movies/:id', movielistControllerCallbacks.bookmarkMovie);
-  app.post('/watchlist/:id/favorite', movielistControllerCallbacks.updateFavorite);
-  app.post('/watchlist/:id/complete', movielistControllerCallbacks.updateComplete);
+  app.post('/movielist/:id/favorite', movielistControllerCallbacks.updateFavorite);
+  app.post('/movielist/:id/complete', movielistControllerCallbacks.updateComplete);
   app.get('/completed',movielistControllerCallbacks.completedMovies);
   app.get('/favorite',movielistControllerCallbacks.favoriteMovies);
-  app.delete('/watchlist/:id/delete', movielistControllerCallbacks.deleteMovie);
+  app.delete('/movielist/:id/delete', movielistControllerCallbacks.deleteMovie);
   //Users
   app.get('/register', userControllerCallbacks.registerPage);
   app.post('/register', userControllerCallbacks.register);

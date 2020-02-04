@@ -60,19 +60,7 @@ module.exports = (dbPoolInstance) => {
         }
     })
   }
-//GET WATCHLIST
-  let watchlist = (userid, callback)=>{
-    let query = "SELECT DISTINCT movie.title, movie.movieid, movie.poster, movie.plot, watchlist.favorite, watchlist.completed, watchlist.userid  FROM movie INNER JOIN watchlist ON(watchlist.movieid=movie.movieid) WHERE watchlist.userid=$1";
-    let values = [userid];
-    dbPoolInstance.query(query, values, (err,resultQuery)=>{
-        if(err){
-            callback(err,null);
-        }else{
-            (resultQuery.rows.length>0)?callback(null, resultQuery.rows):
-                callback(null,null);
-        }
-    });
-  }
+
   let addFavorites = (userid, movieid, callback)=>{
     let query = "UPDATE watchlist SET favorite=$1 WHERE userid=$2 AND movieid=$3";
     let values = [true, userid,movieid];
@@ -123,25 +111,38 @@ module.exports = (dbPoolInstance) => {
   };
   //GET ONLY COMPLETED MOVIES
   let getCompletedMovies = (userid, callback)=>{
-    let query = "SELECT movie.movieid AS id, movie.poster AS poster_path FROM movie INNER JOIN watchlist ON (movie.movieid=watchlist.movieid) WHERE watchlist.userid=$1 AND watchlist.completed = true"
+    let query = "SELECT DISTINCT movie.title, movie.movieid, movie.poster, movie.plot, watchlist.favorite, watchlist.completed, watchlist.userid  FROM movie INNER JOIN watchlist ON(watchlist.movieid=movie.movieid) WHERE watchlist.userid=$1 AND watchlist.completed = true"
     let values = [userid];
      dbPoolInstance.query(query,values, (err, resultQuery)=>{
         if(err){
             callback(err, null);
         }else{
-            callback(null, resultQuery.rows);
+            (resultQuery.rows.length >0)?callback(null, resultQuery.rows):callback(null, null);
         }
     })
   }
+  //GET MOVIE LIST
+  let movielist = (userid, callback)=>{
+    let query = "SELECT DISTINCT movie.title, movie.movieid, movie.poster, movie.plot, watchlist.favorite, watchlist.completed, watchlist.userid  FROM movie INNER JOIN watchlist ON(watchlist.movieid=movie.movieid) WHERE watchlist.userid=$1";
+    let values = [userid];
+    dbPoolInstance.query(query, values, (err,resultQuery)=>{
+        if(err){
+            callback(err,null);
+        }else{
+            (resultQuery.rows.length>0)?callback(null, resultQuery.rows):
+                callback(null,null);
+        }
+    });
+  }
   //GET ONLY FAVORITE MOVIES
   let getFavoriteMovies = (userid, callback)=>{
-    let query = "SELECT movie.movieid AS id, movie.poster AS poster_path FROM movie INNER JOIN watchlist ON (movie.movieid=watchlist.movieid) WHERE watchlist.userid=$1 AND watchlist.favorite=true"
+    let query = "SELECT DISTINCT movie.title, movie.movieid, movie.poster, movie.plot, watchlist.favorite, watchlist.completed, watchlist.userid  FROM movie INNER JOIN watchlist ON(watchlist.movieid=movie.movieid) WHERE watchlist.userid=$1 AND watchlist.favorite = true"
     let values = [userid];
      dbPoolInstance.query(query,values, (err, resultQuery)=>{
         if(err){
             callback(err, null);
         }else{
-            callback(null, resultQuery.rows);
+            (resultQuery.rows.length >0)?callback(null, resultQuery.rows):callback(null, null);
         }
     })
   }
@@ -149,7 +150,7 @@ module.exports = (dbPoolInstance) => {
     checkBookmark,
     addBookmark,
     checkMovies,
-    watchlist,
+    movielist,
     addFavorites,
     addComplete,
     getCompletedMovies,

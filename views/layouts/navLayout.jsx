@@ -7,15 +7,14 @@ class NavLayout extends React.Component {
  <div className="dropdown">
   <button id="meNav" className="dropbtn">Me</button>
   <div className="dropdown-content">
-    <a id="Watchlist" className="navLink" href="/watchlist">My watchlist</a>
-    <a id="Favorite" className="navLink" href="/favorite">Favorites</a>
-    <a id="Completed" className="navLink" href="/completed">Completed</a>
+    <a id="movielist" className="navLink" href="/movielist">My List</a>
+    <a id="profile" className="navLink" href="/profile">Profile</a>
   </div>
 </div><div className="dropdown">
   <button id="peopleNav" className="dropbtn">People</button>
   <div className="dropdown-content">
     <a id="allPeople" className="navLink" href="/people">All</a>
-    <a id="Followed" className="navLink" href="/followed">Followed</a>
+    <a id="Followed" className="navLink" href="/followed">Follow</a>
     <a id="Followers" className="navLink" href="/followers">Followers</a>
   </div>
 </div><div className="dropdown">
