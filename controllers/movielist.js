@@ -64,11 +64,9 @@ module.exports = (db) => {
         const movie_response = await fetch(url);
         const movie = await movie_response.json();
         db.movielist.checkMovies(movie, user_id, (err)=>{
-        const data={movie, bookmarked: true, loggedIn}
-        response.render("movies/movie", data);
         });}
-});}else{
-            response.redirect('/signin');
+        });}else{
+            response.send(true);
         }
       }
   let updateFavorite = (request, response)=>{

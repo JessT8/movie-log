@@ -7,7 +7,7 @@ const bookmark = document.querySelector(".bookmark");
 const bookmarked = document.querySelector(".bookmarked");
 
 if(bookmark){
-const bookmarkClick=()=>{
+const bookmarkClick= ()=>{
     console.log("Setting bookmark");
     var request = new XMLHttpRequest();
     bookmark.classList.remove("bookmark");
@@ -15,6 +15,12 @@ const bookmarkClick=()=>{
     bookmark.disabled = true;
     var url = "/movies/"+parseInt(bookmark.value);
     request.open("POST", url);
+    request.addEventListener("load", function(response){
+        console.log(this.responseText);
+        if(this.responseText){
+            location.href = "/signin";
+        }
+    })
     request.send();
 }
 bookmark.addEventListener("click", bookmarkClick);
