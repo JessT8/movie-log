@@ -4,22 +4,18 @@ const tick = Array.from(ticks);
 const hearts = document.querySelectorAll('.heart');
 const heart = Array.from(hearts);
 const bookmark = document.querySelector(".bookmark");
-const bookmarked = document.querySelector(".bookmarked")
+const bookmarked = document.querySelector(".bookmarked");
+
 if(bookmark){
 const bookmarkClick=()=>{
-    let id = 0;
     console.log("Setting bookmark");
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            bookmark.classList.remove("bookmark");
-            bookmark.classList.add("bookmarked");
-            bookmark.disabled = true;
-        }
-  };
-  var url = "/movies/"+parseInt(bookmark.value);
-  xhttp.open("POST", url);
-  xhttp.send();
+    var request = new XMLHttpRequest();
+    bookmark.classList.remove("bookmark");
+    bookmark.classList.add("bookmarked");
+    bookmark.disabled = true;
+    var url = "/movies/"+parseInt(bookmark.value);
+    request.open("POST", url);
+    request.send();
 }
 bookmark.addEventListener("click", bookmarkClick);
 }else if(bookmarked){
@@ -43,6 +39,7 @@ if(hearts){
 heart.map(h=>h.addEventListener("click",heartClick));
 }
 
+//Highlight navigation
 switch(document.title){
 case "Completed Movies":
 document.querySelector("#meNav").classList.add("activeNav");

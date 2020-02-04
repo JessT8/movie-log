@@ -26,7 +26,7 @@ module.exports = (dbPoolInstance) => {
         console.log(err);
         callback(err);
     }else{
-        if(resultQuery.rows > 0){
+        if(resultQuery.rows.length > 0){
             callback(null);
         }else{
             addMovies(movie,userid,callback);
@@ -142,16 +142,6 @@ module.exports = (dbPoolInstance) => {
     });
   }
   return {
-    checkBookmark,
-    addBookmark,
-    checkMovies,
-    watchlist,
-    addFavorites,
-    addComplete,
-    getCompletedMovies,
-    getFavoriteMovies,
-    removeMovie,
-    individualWatchlist,
-    getWatchlistUser
+    checkBookmark
   };
 };

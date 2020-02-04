@@ -1,3 +1,5 @@
+var multer = require('multer');
+var upload = multer({ dest: './uploads/' });
 module.exports = (app, allModels) => {
 
 
@@ -16,9 +18,10 @@ module.exports = (app, allModels) => {
   const movieControllerCallbacks = require('./controllers/movie')(allModels);
   const movielistControllerCallbacks = require('./controllers/movielist')(allModels);
   const userControllerCallbacks = require('./controllers/user')(allModels);
+  const followControllerCallbacks = require('./controllers/follow')(allModels);
   //movies
   app.get("/", movieControllerCallbacks.redirect);
-  app.get('/credits',movieControllerCallbacks.about);
+  app.get('/credits',movieControllerCallbacks.credit);
   app.get('/movies/upcoming/:num',movieControllerCallbacks.upcomingMovies);
   app.get('/movies/popular/:num',movieControllerCallbacks.popularMovies);
   app.get('/movies/nowPlaying/:num',movieControllerCallbacks.nowPlayingMovies);
@@ -39,8 +42,15 @@ module.exports = (app, allModels) => {
   app.post('/signin', userControllerCallbacks.signingIn);
   app.get('/signout', userControllerCallbacks.signout);
   app.get('/people', userControllerCallbacks.getUsers);
+  app.get('/test', userControllerCallbacks.test);
+  app.post('/test',upload.single('myFile'), userControllerCallbacks.testPost);
+//   app.post('/people/:id', upload.single('myFile'), function(req, res) {
+//   cloudinary.uploader.upload(req.file.path, function(result) {
+//     res.send(result);
+//   });
+// });
   //Follow
-  app.get('/followed', userControllerCallbacks.getFollowed);
-  app.get('/followers', userControllerCallbacks.getFollowers);
-  app.post('/people/:id', userControllerCallbacks.followUser);
+  app.get('/followed', followControllerCallbacks.getFollowed);
+  app.get('/followers', followControllerCallbacks.getFollowers);
+  app.post('/people/:id', followControllerCallbacks.followUser);
 };

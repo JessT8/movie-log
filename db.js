@@ -66,8 +66,10 @@ const allUserModelsFunction = require('./models/user');
 const userModelsObject = allUserModelsFunction( pool );
 const allMovieModelsFunction = require('./models/movie');
 const movieModelsObject = allMovieModelsFunction( pool );
-const allMovieListModelsFunction = require('./models/movie');
+const allMovieListModelsFunction = require('./models/movielist');
 const movieListModelsObject = allMovieListModelsFunction( pool );
+const followModelsFunction = require('./models/follow');
+const followModelsObject = followModelsFunction( pool );
 
 
 
@@ -98,5 +100,6 @@ module.exports = {
    */
   movie: movieModelsObject,
   movielist : movieListModelsObject,
-  users: userModelsObject
+  users: userModelsObject,
+  follow: followModelsObject
 };

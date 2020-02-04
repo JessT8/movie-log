@@ -40,7 +40,7 @@ module.exports = (db) => {
     let path = '/movies/upcoming/1'
     response.redirect(path);
    }
-   let about = (request,response)=>{
+   let credit = (request,response)=>{
      let loggedIn = (isLoggedIn(request))?"true": "false";
      const data ={loggedIn};
     response.render("credit", data);
@@ -110,10 +110,10 @@ module.exports = (db) => {
    */
   return {
     redirect,
+    credit,
     upcomingMovies,
     popularMovies,
     nowPlayingMovies,
-    about,
     getMovie
   };
 

@@ -1,6 +1,6 @@
 const sha256 = require('js-sha256');
 const SALT = "saltCookie";
-
+const cloudinary = require('cloudinary');
 const isLoggedIn = (request) => {
      let user_id = request.cookies.user_id;
      let hashedCookie = sha256(SALT+user_id);
@@ -127,6 +127,17 @@ let followUser = (request, response)=>{
         }
     })
  }
+ let test = (request, response)=>{
+    response.render("test");
+ }
+let testPost = (request, response)=>{
+  cloudinary.uploader.upload(request.file.path, function(result) {
+    response.send(result);
+  }, {
+ folder: 'Profile_pics',
+ use_filename: true
+});
+ }
   /**
    * ===========================================
    * Export controller functions as a module
@@ -141,7 +152,9 @@ let followUser = (request, response)=>{
     getUsers,
     followUser,
     getFollowers,
-    getFollowed
+    getFollowed,
+    test,
+    testPost
   };
 
 }
