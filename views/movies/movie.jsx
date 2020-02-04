@@ -2,20 +2,19 @@ var React = require('react');
 var DefaultLayout = require('../layouts/defaultLayout');
 var NavLayout = require('../layouts/navLayout');
 var MovieLayout = require('../layouts/movieLayout');
+
 class Movie extends React.Component {
   render() {
-    let bookmark = "";
     console.log("In movie react");
+    let bookmark = "";
+
     if(this.props.bookmarked === true){
         bookmark = (
-            <h2><button id="bookmarked" disabled><span className="glyphicon glyphicon-bookmark"></span></button> {this.props.movie.title}</h2>);
+            <h2><button className="bookmarked"><span className="glyphicon glyphicon-bookmark"></span></button> {this.props.movie.title}</h2>);
     }else{
-        let bookmarkLink = `/movies/${this.props.movie.id}`
-        bookmark = (<form method="POST" action={bookmarkLink}>
-            <h2 ><button id="bookmark" type="submit"><span className="glyphicon glyphicon-bookmark"></span></button> {this.props.movie.title}
-            </h2>
-            </form>);
+        bookmark =(<h2><button className="bookmark" value={this.props.movie.id}><span className="glyphicon glyphicon-bookmark"></span></button> {this.props.movie.title}</h2>);
     }
+
     let videos= this.props.movie.videos.results;
     let key = videos.filter(video => video.type === 'Trailer');
     let videoSrc = `https://www.youtube.com/embed/${key[0].key}`;

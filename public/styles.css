@@ -56,16 +56,16 @@ width:"290px";
 .cross:hover{
 	color:red;
 }
-#bookmarked{
+.bookmarked{
 		color:#FFFF0A;
 	  background-color: transparent;
 		cursor:default;
 }
-#bookmark{
+.bookmark{
 	color:white;
 	background-color: transparent;
 }
-#bookmark:hover{
+.bookmark:hover{
 	color:#FFFF0A;
 	  cursor:pointer;
 }

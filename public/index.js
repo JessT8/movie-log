@@ -1,13 +1,29 @@
-const bookmark = document.querySelector("#bookmark");
+
 const ticks = document.querySelectorAll(".tick");
 const tick = Array.from(ticks);
 const hearts = document.querySelectorAll('.heart');
 const heart = Array.from(hearts);
-
-const bookmarkClick=()=> {
+const bookmark = document.querySelector(".bookmark");
+const bookmarked = document.querySelector(".bookmarked")
+if(bookmark){
+const bookmarkClick=()=>{
+    let id = 0;
     console.log("Setting bookmark");
-    let currentColor = bookmark.style.color;
-    if(!currentColor){bookmark.setAttribute('style', 'color:#FFFF0A;');};
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            bookmark.classList.remove("bookmark");
+            bookmark.classList.add("bookmarked");
+            bookmark.disabled = true;
+        }
+  };
+  var url = "/movies/"+parseInt(bookmark.value);
+  xhttp.open("POST", url);
+  xhttp.send();
+}
+bookmark.addEventListener("click", bookmarkClick);
+}else if(bookmarked){
+bookmarked.disabled = true;
 }
 const tickClick = (e) =>{
     console.log("setting tick");
@@ -20,9 +36,12 @@ const heartClick = (e)=>{
     e.target.classList.remove("icon");
     e.target.classList.add("clickedHeart");
 }
-// tick.map(t=>t.addEventListener("click", tickClick));
-// heart.map(h=>h.addEventListener("click",heartClick));
-// bookmark.addEventListener("click", bookmarkClick);
+if(ticks){
+tick.map(t=>t.addEventListener("click", tickClick));
+}
+if(hearts){
+heart.map(h=>h.addEventListener("click",heartClick));
+}
 
 switch(document.title){
 case "Completed Movies":
