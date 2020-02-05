@@ -4,6 +4,9 @@
  	 color:#FFFFFF
 
  	}
+ @-ms-viewport{
+  width: device-width;
+}
 .poster{
 	background-position:center;
 	background-repeat:no-repeat;
