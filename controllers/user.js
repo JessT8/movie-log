@@ -2,9 +2,9 @@ const sha256 = require('js-sha256');
 const SALT = "saltCookie";
 const cloudinary = require('cloudinary');
 const isLoggedIn = (request) => {
-     let user_id = request.cookies.user_id;
-     let hashedCookie = sha256(SALT+user_id);
-     return ( request.cookies.loggedIn === hashedCookie) ? true : false;
+ let user_id = request.cookies.user_id;
+ let hashedCookie = sha256(SALT+user_id);
+ return ( request.cookies.loggedIn === hashedCookie) ? true : false;
 }
 
 module.exports = (db) => {
@@ -15,7 +15,7 @@ module.exports = (db) => {
    */
    let registerPage = (request,response)=>{
     response.render("user/register");
-   }
+}
 
    //register user
    let register = (request,response)=>{
@@ -29,23 +29,23 @@ module.exports = (db) => {
                 response.render("user/register", data)
             }
             else{
-                    response.send(err);
-                }
+                response.send(err);
+            }
         }else{
-        let hashedCookie = sha256(SALT+user[0].id);
-                response.cookie('user_id', user[0].id);
-                response.cookie('username', username);
-                response.cookie('loggedIn', hashedCookie);
-                response.redirect('/');
-         }
+            let hashedCookie = sha256(SALT+user[0].id);
+            response.cookie('user_id', user[0].id);
+            response.cookie('username', username);
+            response.cookie('loggedIn', hashedCookie);
+            response.redirect('/');
+        }
     });
-   }
+}
 let signin = (request, response) => {
-     const data = {errmsg: ""};
-    (isLoggedIn(request))
-    ? response.redirect("/") :
-    response.render("user/signin", data);
-  }
+ const data = {errmsg: ""};
+ (isLoggedIn(request))
+ ? response.redirect("/") :
+ response.render("user/signin", data);
+}
 
 let signingIn = (request, response)=>{
   let username = request.body.username;
@@ -53,21 +53,21 @@ let signingIn = (request, response)=>{
   db.users.validateUser(username,password,(error, user)=>{
     if(error){
       response.send(error);
-        }else{
-            if(user.length < 1){
-                const data = { error : "Your user name or password is invalid."};
-                response.render("user/signin", data);
-            }else{
-                 let hashedCookie = sha256(SALT+user[0].id);
-                response.cookie('user_id', user[0].id);
-                response.cookie('username', user[0].username);
-                response.cookie('loggedIn', hashedCookie);
-                response.redirect('/');
-            }
-        }
-    });
-      }
-      let signout = (request,response)=>{
+  }else{
+    if(user.length < 1){
+        const data = { error : "Your user name or password is invalid."};
+        response.render("user/signin", data);
+    }else{
+     let hashedCookie = sha256(SALT+user[0].id);
+     response.cookie('user_id', user[0].id);
+     response.cookie('username', user[0].username);
+     response.cookie('loggedIn', hashedCookie);
+     response.redirect('/');
+ }
+}
+});
+}
+let signout = (request,response)=>{
     response.clearCookie('user_id');
     response.clearCookie('username');
     response.clearCookie('loggedIn');
@@ -83,10 +83,10 @@ let getUsers = (request,response) =>{
             const data = {
                 users,
                 loggedIn:"true"}
-            response.render("user/showusers", data);
+                response.render("user/showusers", data);
 
-        }
-    })
+            }
+        })
 }
 let followUser = (request, response)=>{
     let userid = request.cookies.user_id;
@@ -99,7 +99,7 @@ let followUser = (request, response)=>{
         }
     })
 }
- let getFollowers = (request,response)=>{
+let getFollowers = (request,response)=>{
     let userid = request.cookies.user_id;
     db.users.getUsersFollowers(userid, (err, following)=>{
         if(err){
@@ -112,8 +112,8 @@ let followUser = (request, response)=>{
             response.render("user/showfollower", data)
         }
     })
- }
- let getFollowed = (request, response)=>{
+}
+let getFollowed = (request, response)=>{
     let userid = request.cookies.user_id;
     db.users.getUserFollows(userid, (err, following)=>{
         if(err){
@@ -126,22 +126,22 @@ let followUser = (request, response)=>{
             response.render("user/showfollow", data)
         }
     })
- }
- let profile = (request, response)=>{
-        let userid = request.cookies.user_id;
-   db.users.getProfile(userid,(err, img)=>{
-    if(err){
+}
+let profile = (request, response)=>{
+    let userid = request.cookies.user_id;
+    db.users.getProfile(userid,(err, img)=>{
+        if(err){
             response.send("Upload profile" + err);
         }else{
-                const data = {
-                    img:`https://res.cloudinary.com/do3q60bdd/image/upload/v${img[0].version}/${img[0].public_id}.png`
-                    }
-    response.render("user/profile",data);}});
- };
+            const data = {
+                img:`https://res.cloudinary.com/do3q60bdd/image/upload/v${img[0].version}/${img[0].public_id}.png`
+            }
+            response.render("user/profile",data);}});
+};
 let uploadProfile = (request, response)=>{
     let userid = request.cookies.user_id;
-db.users.getProfile(userid,(err, img)=>{
-    if(err){
+    db.users.getProfile(userid,(err, img)=>{
+        if(err){
             response.send("Upload profile" + err);
         }else{
             //if results
@@ -150,35 +150,35 @@ db.users.getProfile(userid,(err, img)=>{
                 console.log("done");
                 console.log(res);
             })}
-            cloudinary.uploader.upload(request.file.path, function(result) {
+               cloudinary.uploader.upload(request.file.path, function(result) {
                 let res = result;
-console.log(res);
+                console.log(res);
                 db.users.uploadProfile(res.version, res.public_id,userid,(error)=>{
-                const data = {
-                    check:img[0].public_id,
-                    img:`https://res.cloudinary.com/do3q60bdd/image/upload/v${res.version}/${res.public_id}.png`
+                    const data = {
+                        check:img[0].public_id,
+                        img:`https://res.cloudinary.com/do3q60bdd/image/upload/v${res.version}/${res.public_id}.png`
                     }
 
-            response.render("user/profile", data)
-             });
+                    response.render("user/profile", data)
+                });
             }, {
                 folder: 'Profile_pics',
                 use_filename: true
             });
-        }
-})
+           }
+       })
 
 
 
 
 
- }
+}
   /**
    * ===========================================
    * Export controller functions as a module
    * ===========================================
    */
-  return {
+   return {
     registerPage,
     register,
     signin,
@@ -190,6 +190,6 @@ console.log(res);
     getFollowed,
     profile,
     uploadProfile
-  };
+};
 
 }

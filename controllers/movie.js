@@ -40,6 +40,7 @@ module.exports = (db) => {
     let path = '/movies/upcoming/1'
     response.redirect(path);
    }
+
    let credit = (request,response)=>{
      let loggedIn = (isLoggedIn(request))?"true": "false";
      const data ={loggedIn};
