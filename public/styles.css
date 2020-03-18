@@ -7,13 +7,6 @@
  @-ms-viewport{
   width: device-width;
 }
-.poster{
-	background-position:center;
-	background-repeat:no-repeat;
-	background-size:cover;
-	height:400px;
-	width:290px;
-}
 .icon{
 	font-size: 40px;
 	color:white;

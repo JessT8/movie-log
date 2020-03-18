@@ -8,8 +8,11 @@ class MovieLayout extends React.Component {
     movieList = movies.map((movie)=>{
         let img = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
         let movie_link = `/movies/${movie.id}`;
-        return (<a href={movie_link}>
-            <div className="poster m-3" style={{backgroundImage: `url(${img})`}}></div></a>)
+        return (
+            <div className="col-3">
+            <a href={movie_link}>
+            <img className="img-responsive m-3 " src={img}></img></a>
+            </div>)
     });
     }else{
         movieList = (<div style={{ margin:"0 auto", paddingTop:"100px"}}>
@@ -40,9 +43,11 @@ class MovieLayout extends React.Component {
     return (
         <div className="center">
         <h2>{this.props.header}</h2>
-        <div className="row d-flex">
+        <div className="container">
+        <div className="row">
         {movieList}
         {displayPageNav}
+        </div>
         </div>
         </div>
     );
